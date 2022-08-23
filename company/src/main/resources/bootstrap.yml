@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: company
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: localhost:8848
+        namespace: 9561f0ac-36a7-43b0-bcb3-9e34865b3d70
+        group: dev
+      discovery:
+        server-addr: localhost:8848
+        namespace: 9561f0ac-36a7-43b0-bcb3-9e34865b3d70
+        group: dev
+        ephemeral: false
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      enabled: true
+      eager: true
+  redis:
+    host: localhost
+    port: 6379
+server:
+  servlet:
+    context-path: /company
+security:
+  signing-key: web
+  oauth2:
+    client:
+      client-id: web
+      client-secret: 123456
+#      access-token-uri: http://localhost:8083/oauth2/oauth/token
+#      user-authorization-uri: http://localhost:8083/oauth2/oauth/authorize
+    resource:
+      jwt:
+        key-value: web
+#      token-info-uri: http://localhost:8083/oauth2/oauth/check_token
+feign:
+  oauth2:
+    enabled: true
+    load-balanced: true
+company:
+  staff:
+    admin-id: 1
+  role:
+    admin-id: 1
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: sys_

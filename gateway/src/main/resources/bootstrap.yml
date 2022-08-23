@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: localhost:8848
+        namespace: 9561f0ac-36a7-43b0-bcb3-9e34865b3d70
+        group: dev
+      discovery:
+        server-addr: localhost:8848
+        namespace: 9561f0ac-36a7-43b0-bcb3-9e34865b3d70
+        group: dev
+        ephemeral: false
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      enabled: true
+      eager: true
+    gateway:
+      routes:
+        - id: company
+          uri: lb://company
+          predicates:
+            - Path=/company/**
+        - id: oauth
+          uri: lb://oauth
+          predicates:
+            - Path=/oauth/**
+  redis:
+    host: localhost
+    port: 6379
+server:
+  servlet:
+    context-path: /gateway

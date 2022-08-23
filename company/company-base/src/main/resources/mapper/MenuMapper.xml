@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.MenuMapper">
+    <select id="selectMenuPermsByStaffId" resultType="java.lang.String">
+        select distinct sm.perms
+        from sys_menu sm
+        left join sys_role_menu srm on sm.id = srm.menu_id
+        left join sys_staff_role ssr on srm.role_id = ssr.role_id
+        left join sys_role sr on sr.id = ssr.role_id
+        where sm.status = 0 and sr.status = 0 and ssr.staff_id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>
