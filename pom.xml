@@ -18,6 +18,7 @@
         <module>swagger</module>
         <module>jpa</module>
         <module>web</module>
+        <module>musicD</module>
     </modules>
 
     <properties>
