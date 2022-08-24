@@ -6,37 +6,29 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Data;
 
-/**
- * 评论表
- * @TableName comments
- */
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+import org.example.constants.BaseEntity;
+
 @TableName(value ="comments")
 @Data
-public class Comments implements Serializable {
-    /**
-     * id
-     */
-    @TableId(value = "id")
-    private String id;
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class Comments extends BaseEntity {
 
-    /**
-     * 回复给谁的id
-     */
     @TableField(value = "to_user_id")
+    @ApiModelProperty(value = "被回复者Id")
     private String toUserId;
 
-    /**
-     * 父级id
-     */
     @TableField(value = "p_id")
+    @ApiModelProperty(value = "父级Id")
     private String pId;
 
-    /**
-     * 评论内容
-     */
     @TableField(value = "details")
+    @ApiModelProperty(value = "评论内容")
     private String details;
 
     /**

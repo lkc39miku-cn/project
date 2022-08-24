@@ -4,74 +4,46 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.example.constants.BaseEntity;
 
-/**
- * 专辑
- * @TableName album
- */
 @TableName(value ="album")
 @Data
-@ApiModel(value = "RoleMenu对象", description = "无")
-public class Album implements Serializable {
-    /**
-     * id
-     */
-    @TableId(value = "id")
-    private String id;
+@EqualsAndHashCode(callSuper = false)
+@ApiModel(value = "专辑")
+public class Album extends BaseEntity {
+    @Serial
+    private static final long serialVersionUID = -149802188336127684L;
 
-    /**
-     * 专辑名称
-     */
     @TableField(value = "name")
+    @ApiModelProperty(value = "专辑名称")
     private String name;
 
-    /**
-     * 专辑封面
-     */
     @TableField(value = "img")
+    @ApiModelProperty(value = "专辑图片")
     private String img;
 
-    /**
-     * 发行时间
-     */
     @TableField(value = "time")
+    @ApiModelProperty(value = "专辑时间")
     private LocalDateTime time;
 
-    /**
-     * 专辑简介
-     */
     @TableField(value = "details")
+    @ApiModelProperty(value = "专辑详情")
     private String details;
 
-    /**
-     * 创建人
-     */
     @TableField(value = "create_staff_id")
+    @ApiModelProperty(value = "创建人id")
     private String createStaffId;
 
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private LocalDateTime updateTime;
-
-    /**
-     * 备注
-     */
     @TableField(value = "remark")
+    @ApiModelProperty(value = "备注")
     private String remark;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }
