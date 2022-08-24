@@ -16,11 +16,11 @@ public class ServiceException extends BaseException {
     @Setter
     private String message;
 
-    public ServiceException(BaseEnum baseEnum) {
+    public ServiceException(BaseEnum<?> baseEnum) {
         super(baseEnum, BaseModule.SERVICE);
     }
 
-    public ServiceException(BaseEnum baseEnum, String message) {
+    public ServiceException(BaseEnum<?> baseEnum, String message) {
         super(baseEnum, BaseModule.SERVICE);
         this.message = message;
     }

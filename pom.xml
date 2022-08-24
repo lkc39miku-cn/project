@@ -14,7 +14,10 @@
         <module>framework</module>
         <module>gateway</module>
         <module>oauth2</module>
-        <module>company/company-base</module>
+        <module>company/company-simple</module>
+        <module>swagger</module>
+        <module>jpa</module>
+        <module>web</module>
     </modules>
 
     <properties>
