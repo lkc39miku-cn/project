@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 /**
@@ -14,6 +16,7 @@ import lombok.Data;
  */
 @TableName(value ="album")
 @Data
+@ApiModel(value = "RoleMenu对象", description = "无")
 public class Album implements Serializable {
     /**
      * id
