@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.example.entity.Post;
+import org.example.entity.Staff;
 
 import java.io.Serial;
 
@@ -20,5 +21,5 @@ public final class PostVo extends Post {
     private static final long serialVersionUID = 7154514817466663214L;
 
     @ApiModelProperty(value="创建者")
-    private StaffVo createStaff;
+    private Staff createStaff;
 }

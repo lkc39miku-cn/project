@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.example.entity.Role;
+import org.example.entity.Staff;
 
 import java.io.Serial;
 
@@ -20,5 +21,5 @@ public final class RoleVo extends Role {
     private static final long serialVersionUID = 3626895904378816053L;
 
     @ApiModelProperty(value = "创建者")
-    private StaffVo createStaff;
+    private Staff createStaff;
 }

@@ -7,4 +7,14 @@
             (#{item}, #{id})
         </foreach>
     </insert>
+
+    <select id="insertBatch" resultType="int">
+        insert into spring_cloud.sys_staff_role (
+        staff_id, role_id
+        )
+        values
+        <foreach collection="roleIdList" item="item" separator=",">
+            (#{id,jdbcType=VARCHAR}, #{item,jdbcType=VARCHAR})
+        </foreach>
+    </select>
 </mapper>

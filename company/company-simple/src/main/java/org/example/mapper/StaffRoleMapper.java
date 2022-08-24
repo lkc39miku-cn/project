@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface StaffRoleMapper extends BaseMapper<StaffRole> {
     int assignBatch(@Param(value = "id") String id, @Param(value = "staffIdList") List<String> staffIdList);
+
+    int insertBatch(@Param(value = "id") String id,@Param(value = "roleIdList") List<String> roleIdList);
 }

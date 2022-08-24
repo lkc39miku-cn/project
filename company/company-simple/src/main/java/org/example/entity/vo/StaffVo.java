@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.example.entity.Dept;
 import org.example.entity.Role;
 import org.example.entity.Staff;
 
@@ -22,11 +23,11 @@ public final class StaffVo extends Staff {
     private static final long serialVersionUID = -3965432170248840502L;
 
     @ApiModelProperty(value="创建人")
-    private StaffVo createStaff;
+    private Staff createStaff;
 
     @ApiModelProperty(value = "部门")
-    private DeptVo dept;
+    private Dept dept;
 
     @ApiModelProperty(value = "角色列表")
-    private List<Role> roleList;
+    private List<RoleVo> roleList;
 }

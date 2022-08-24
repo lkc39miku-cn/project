@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.example.entity.Dept;
+import org.example.entity.Staff;
 
 import java.io.Serial;
 import java.util.List;
@@ -21,10 +22,10 @@ public final class DeptVo extends Dept {
     private static final long serialVersionUID = -5302349466820596459L;
 
     @ApiModelProperty(value="创建人")
-    private StaffVo createStaff;
+    private Staff createStaff;
 
     @ApiModelProperty(value = "领导人")
-    private StaffVo leaderStaff;
+    private Staff leaderStaff;
 
     @ApiModelProperty(value = "子部门")
     private List<DeptVo> children;

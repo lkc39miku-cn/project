@@ -3,11 +3,13 @@ package org.example.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.example.entity.Dept;
+import org.example.entity.Role;
 import org.example.entity.Staff;
 import org.example.entity.convert.DeptConvert;
 import org.example.entity.vo.DeptVo;
 import org.example.key.DeptKey;
 import org.example.mapper.DeptMapper;
+import org.example.mapper.RoleMapper;
 import org.example.mapper.StaffMapper;
 import org.example.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class DeptServiceImpl implements DeptService {
     private DeptMapper deptMapper;
     @Autowired
     private StaffMapper staffMapper;
+    @Autowired
+    private RoleMapper roleMapper;
     @Autowired
     private DeptConvert deptConvert;
 
@@ -48,12 +52,12 @@ public class DeptServiceImpl implements DeptService {
     public List<DeptVo> tree(List<DeptVo> deptVoList) {
         List<DeptVo> tree = new ArrayList<>();
         deptVoList.forEach(v -> {
-            if (v.getParentId().equals("0")) {
+            if ("0".equals(v.getParentId())) {
                 tree.add(v);
             }
         });
 
-        return convertTree(tree, deptVoList.stream().filter(v -> !v.getParentId().equals("0")).toList());
+        return convertTree(tree, deptVoList.stream().filter(v -> !"0".equals(v.getParentId())).toList());
     }
 
     private List<DeptVo> convertTree(List<DeptVo> tree, List<DeptVo> deptVoList) {
@@ -76,7 +80,32 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     public List<DeptVo> roleTree(String roleId) {
-        return null;
+        Role role = roleMapper.selectById(roleId);
+        List<String> list = deptMapper.roleTree(role.getId(), role.isDeptCheckStrictly());
+        List<DeptVo> deptList = selectList(new Dept().setStatus(DeptKey.IS_USED).setDeleteStatus(DeptKey.IS_NOT_DELETE));
+
+        List<DeptVo> tree = new ArrayList<>();
+        deptList.forEach(v -> {
+            if ("0".equals(v.getParentId())) {
+                tree.add(v);
+            }
+        });
+        List<DeptVo> convertTree = convertTree(tree, deptList.stream().filter(v -> !"0".equals(v.getParentId())).toList());
+
+        return checkStatus(convertTree, list);
+    }
+
+    private List<DeptVo> checkStatus(List<DeptVo> tree, List<String> list) {
+        tree.forEach(v -> {
+            if (list.contains(v.getId())) {
+                v.setChecked(true);
+                list.remove(v.getId());
+            }
+            if (v.getChildren() != null) {
+                checkStatus(v.getChildren(), list);
+            }
+        });
+        return tree;
     }
 
     @Override

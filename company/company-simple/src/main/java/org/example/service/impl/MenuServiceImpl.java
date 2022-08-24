@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.example.entity.Menu;
+import org.example.entity.Role;
 import org.example.entity.RoleMenu;
 import org.example.entity.convert.MenuConvert;
 import org.example.entity.vo.MenuVo;
+import org.example.key.MenuKey;
 import org.example.mapper.MenuMapper;
+import org.example.mapper.RoleMapper;
 import org.example.mapper.RoleMenuMapper;
 import org.example.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ public class MenuServiceImpl implements MenuService {
     private MenuMapper menuMapper;
     @Autowired
     private RoleMenuMapper roleMenuMapper;
+    @Autowired
+    private RoleMapper roleMapper;
     @Autowired
     private MenuConvert menuConvert;
 
@@ -49,12 +54,12 @@ public class MenuServiceImpl implements MenuService {
     public List<MenuVo> tree(List<MenuVo> menuVoList) {
         List<MenuVo> tree = new ArrayList<>();
         menuVoList.forEach(v -> {
-            if (v.getParentId().equals("0")) {
+            if ("0".equals(v.getParentId())) {
                 tree.add(v);
             }
         });
 
-        return convertTree(tree, menuVoList.stream().filter(v -> !v.getParentId().equals("0")).toList());
+        return convertTree(tree, menuVoList.stream().filter(v -> !"0".equals(v.getParentId())).toList());
     }
 
     private List<MenuVo> convertTree(List<MenuVo> tree, List<MenuVo> menuVoList) {
@@ -77,7 +82,32 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<MenuVo> roleTree(String roleId) {
-        return null;
+        Role role = roleMapper.selectById(roleId);
+        List<String> list = menuMapper.roleTree(role.getId(), role.isMenuCheckStrictly());
+        List<MenuVo> menuVoList = selectList(new Menu().setVisible(MenuKey.IS_SHOW).setStatus(MenuKey.IS_USED));
+
+        List<MenuVo> tree = new ArrayList<>();
+        menuVoList.forEach(v -> {
+            if ("0".equals(v.getParentId())) {
+                tree.add(v);
+            }
+        });
+        List<MenuVo> convertTree = convertTree(tree, menuVoList.stream().filter(v -> !"0".equals(v.getParentId())).toList());
+
+        return checkStatus(convertTree, list);
+    }
+
+    private List<MenuVo> checkStatus(List<MenuVo> tree, List<String> list) {
+        tree.forEach(v -> {
+            if (list.contains(v.getId())) {
+                v.setChecked(true);
+                list.remove(v.getId());
+            }
+            if (v.getChildren() != null) {
+                checkStatus(v.getChildren(), list);
+            }
+        });
+        return tree;
     }
 
     @Override
