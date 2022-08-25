@@ -4,65 +4,52 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Data;
 
-/**
- * 轮播图表
- * @TableName slide
- */
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+import org.example.constants.BaseEntity;
+
 @TableName(value ="slide")
 @Data
-public class Slide implements Serializable {
-    /**
-     * id
-     */
-    @TableId(value = "id")
-    private String id;
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@ApiModel(value = "轮播图表")
+public class Slide extends BaseEntity {
+    @Serial
+    private static final long serialVersionUID = 6598244179795057146L;
 
-    /**
-     * 轮播图路径
-     */
     @TableField(value = "img")
+    @ApiModelProperty(value = "轮播图路径")
     private String img;
 
-    /**
-     * 专辑id
-     */
     @TableField(value = "album_id")
+    @ApiModelProperty(value = "专辑id")
     private String albumId;
 
-    /**
-     * 是否有效
-     */
-    @TableField(value = "val_id")
-    private String valId;
+    @TableField(value = "status")
+    @ApiModelProperty(value = "是否有效 0无效 1有效")
+    private Integer status;
 
-    /**
-     * 创建人
-     */
     @TableField(value = "create_staff_id")
+    @ApiModelProperty(value = "创建人id")
     private String createStaffId;
 
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
-    private LocalDateTime createTime;
+    @TableField(value = "start_time")
+    @ApiModelProperty(value = "开始时间")
+    private LocalDateTime startTime;
 
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private LocalDateTime updateTime;
+    @TableField(value = "end_time")
+    @ApiModelProperty(value = "结束时间")
+    private LocalDateTime endTime;
 
-    /**
-     * 备注
-     */
     @TableField(value = "remark")
+    @ApiModelProperty(value = "备注")
     private String remark;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }

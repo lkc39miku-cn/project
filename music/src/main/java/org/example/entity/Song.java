@@ -4,83 +4,52 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Data;
 
-/**
- * 歌曲表
- * @TableName song
- */
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+import org.example.constants.BaseEntity;
+
 @TableName(value ="song")
 @Data
-public class Song implements Serializable {
-    /**
-     * 歌曲id
-     */
-    @TableId(value = "id")
-    private String id;
+@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
+@ApiModel(value = "歌曲表")
+public class Song extends BaseEntity {
+    @Serial
+    private static final long serialVersionUID = 3270773343320794428L;
 
-    /**
-     * 歌曲名
-     */
     @TableField(value = "name")
+    @ApiModelProperty(value = "歌曲名")
     private String name;
 
-    /**
-     * 歌手Id
-     */
     @TableField(value = "singer")
-    private String singer;
+    @ApiModelProperty(value = "歌手id")
+    private String singerId;
 
-    /**
-     * 歌曲图片
-     */
     @TableField(value = "img")
+    @ApiModelProperty(value = "歌曲图片路径")
     private String img;
 
-    /**
-     * 歌曲文件路径
-     */
     @TableField(value = "file_path")
+    @ApiModelProperty(value = "歌曲文件路径")
     private LocalDateTime filePath;
 
-    /**
-     * 专辑Id
-     */
-    @TableField(value = "album")
-    private String album;
+    @TableField(value = "album_id")
+    @ApiModelProperty(value = "专辑id")
+    private String albumId;
 
-    /**
-     * 歌词
-     */
     @TableField(value = "lyc")
+    @ApiModelProperty(value = "歌词")
     private String lyc;
 
-    /**
-     * 创建人id
-     */
-    @TableField(value = "create_staff_id")
-    private Integer createStaffId;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private LocalDateTime updateTime;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
-    private String createTime;
-
-    /**
-     * 备注
-     */
     @TableField(value = "remark")
+    @ApiModelProperty(value = "备注")
     private String remark;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }

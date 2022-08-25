@@ -4,65 +4,37 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Data;
 
-/**
- * 粉丝关注表
- * @TableName fans
- */
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+import org.example.constants.BaseEntity;
+
 @TableName(value ="fans")
 @Data
-public class Fans implements Serializable {
-    /**
-     * id
-     */
-    @TableId(value = "id")
-    private String id;
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@ApiModel(value = "粉丝关注表")
+public class Fans extends BaseEntity {
 
-    /**
-     * 类型，区分关注的是歌手还是用户
-     */
+    @Serial
+    private static final long serialVersionUID = 2249486902203266170L;
+
     @TableField(value = "type")
-    private String type;
+    @ApiModelProperty(value = "类型 区分关注的是歌手还是用户")
+    private Integer type;
 
-    /**
-     * 被关注者id,可能是歌手
-     */
     @TableField(value = "focus_id")
+    @ApiModelProperty(value = "被关注者id 可能是歌手")
     private String focusId;
 
-    /**
-     * 关注者id
-     */
     @TableField(value = "fans_id")
+    @ApiModelProperty(value = "关注者id")
     private String fansId;
-
-    /**
-     * 创建人
-     */
-    @TableField(value = "create_staff_id")
-    private String createStaffId;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private LocalDateTime updateTime;
-
-    /**
-     * 备注
-     */
-    @TableField(value = "remark")
-    private String remark;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }

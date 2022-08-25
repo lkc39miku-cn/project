@@ -13,11 +13,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 import org.example.constants.BaseEntity;
 
 @TableName(value ="album")
 @Data
 @EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "专辑")
 public class Album extends BaseEntity {
     @Serial
@@ -28,20 +30,20 @@ public class Album extends BaseEntity {
     private String name;
 
     @TableField(value = "img")
-    @ApiModelProperty(value = "专辑图片")
+    @ApiModelProperty(value = "专辑图片路径")
     private String img;
 
     @TableField(value = "time")
     @ApiModelProperty(value = "专辑时间")
-    private LocalDateTime time;
+    private LocalDateTime albumTime;
 
     @TableField(value = "details")
     @ApiModelProperty(value = "专辑详情")
     private String details;
 
-    @TableField(value = "create_staff_id")
+    @TableField(value = "create_user_id")
     @ApiModelProperty(value = "创建人id")
-    private String createStaffId;
+    private String createUserId;
 
     @TableField(value = "remark")
     @ApiModelProperty(value = "备注")

@@ -4,65 +4,44 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Data;
 
-/**
- * 歌手
- * @TableName singer
- */
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+import org.example.constants.BaseEntity;
+
 @TableName(value ="singer")
 @Data
-public class Singer implements Serializable {
-    /**
-     * 歌手id
-     */
-    @TableId(value = "id")
-    private String id;
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@ApiModel(value = "歌手")
+public class Singer extends BaseEntity {
+    @Serial
+    private static final long serialVersionUID = -3186729666133760637L;
 
-    /**
-     * 歌手名称
-     */
     @TableField(value = "name")
+    @ApiModelProperty(value = "歌手名称")
     private String name;
 
-    /**
-     * 歌手头像
-     */
     @TableField(value = "photo")
+    @ApiModelProperty(value = "歌手头像路径")
     private String photo;
 
-    /**
-     * 歌手简介
-     */
     @TableField(value = "details")
+    @ApiModelProperty(value = "歌手简介")
     private String details;
 
-    /**
-     * 创建人id
-     */
-    @TableField(value = "create_staff_id")
-    private Integer createStaffId;
+    @TableField(value = "user_id")
+    @ApiModelProperty(value = "关联用户id")
+    private String userId;
 
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private LocalDateTime updateTime;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
-    private String createTime;
-
-    /**
-     * 备注
-     */
     @TableField(value = "remark")
+    @ApiModelProperty(value = "备注")
     private String remark;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }

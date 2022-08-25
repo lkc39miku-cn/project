@@ -19,6 +19,9 @@
         <module>jpa</module>
         <module>web</module>
         <module>music</module>
+        <module>user</module>
+        <module>user/user-simple</module>
+        <module>oauth2-user</module>
     </modules>
 
     <properties>

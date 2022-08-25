@@ -1,62 +1,34 @@
 package org.example.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Data;
 
-/**
- * 用户收藏歌曲表
- * @TableName user_song
- */
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 @TableName(value ="user_song")
 @Data
+@Accessors(chain = true)
+@ApiModel(value = "用户收藏歌曲表")
 public class UserSong implements Serializable {
-    /**
-     * id
-     */
-    @TableId(value = "id")
-    private String id;
 
-    /**
-     * 用户id
-     */
+    @Serial
+    private static final long serialVersionUID = 8251961428835005002L;
+
     @TableField(value = "user_id")
+    @ApiModelProperty(value = "用户id")
     private String userId;
 
-    /**
-     * 歌曲id
-     */
     @TableField(value = "song_id")
+    @ApiModelProperty(value = "歌曲id")
     private String songId;
 
-    /**
-     * 创建人
-     */
-    @TableField(value = "create_staff_id")
-    private String createStaffId;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private LocalDateTime updateTime;
-
-    /**
-     * 备注
-     */
-    @TableField(value = "remark")
-    private String remark;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }
