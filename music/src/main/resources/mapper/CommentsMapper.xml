@@ -9,14 +9,11 @@
             <result property="toUserId" column="to_user_id" jdbcType="VARCHAR"/>
             <result property="pId" column="p_id" jdbcType="VARCHAR"/>
             <result property="details" column="details" jdbcType="VARCHAR"/>
-            <result property="time" column="time" jdbcType="TIMESTAMP"/>
             <result property="userId" column="user_id" jdbcType="VARCHAR"/>
             <result property="type" column="type" jdbcType="INTEGER"/>
             <result property="targetId" column="target_id" jdbcType="VARCHAR"/>
-            <result property="createStaffId" column="create_staff_id" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="remark" column="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
 </mapper>

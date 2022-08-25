@@ -6,4 +6,5 @@ import lombok.Data;
 @ApiModel(value="部门Param")
 @Data
 public final class DeptParam {
+
 }

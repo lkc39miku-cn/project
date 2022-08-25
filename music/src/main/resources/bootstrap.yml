@@ -37,6 +37,7 @@ spring:
     password: 123456
 
 security:
+  signing-key: web
   oauth2:
     client:
       client-id: web

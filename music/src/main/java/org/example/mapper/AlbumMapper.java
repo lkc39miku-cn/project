@@ -2,6 +2,7 @@ package org.example.mapper;
 
 import org.example.entity.Album;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
 * @author adm
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2022-08-24 19:02:25
 * @Entity org.example.entity.Album
 */
+@Repository
 public interface AlbumMapper extends BaseMapper<Album> {
 
 }

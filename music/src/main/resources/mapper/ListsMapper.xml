@@ -10,7 +10,6 @@
             <result property="img" column="img" jdbcType="VARCHAR"/>
             <result property="details" column="details" jdbcType="VARCHAR"/>
             <result property="playNum" column="play_num" jdbcType="INTEGER"/>
-            <result property="createStaffId" column="create_staff_id" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
