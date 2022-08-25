@@ -8,6 +8,7 @@ import org.example.mapper.StaffMapper;
 import org.example.util.Convert;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,13 +25,13 @@ public abstract class MenuConvert implements Convert<Menu, MenuVo> {
     public abstract List<MenuVo> convert(List<Menu> menuList);
 
     @AfterMapping
-    public void convert(Menu menu, MenuVo menuVo) {
+    public void convert(Menu menu, @MappingTarget MenuVo menuVo) {
         menuVo.setCreateStaff(staffMapper.selectOne(new LambdaQueryWrapper<Staff>()
                 .eq(Staff::getId, menuVo.getCreateStaffId())));
     }
 
     @AfterMapping
-    public void convert(List<Menu> menuList, List<MenuVo> menuVoList) {
+    public void convert(List<Menu> menuList, @MappingTarget List<MenuVo> menuVoList) {
         menuVoList.forEach(v -> convert(null, v));
     }
 }

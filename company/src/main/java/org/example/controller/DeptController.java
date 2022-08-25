@@ -24,7 +24,7 @@ public class DeptController {
     @Autowired
     private DeptService deptService;
 
-    @GetMapping("select/{id}")
+    @GetMapping("/select/{id}")
     @ApiOperation(value = "通过主键查询单条数据", notes = "通过主键查询单条数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:dept:query')")
     public R<DeptVo> selectOne(@PathVariable(value = "id") String id) {
@@ -32,7 +32,7 @@ public class DeptController {
                 .ok(deptService.selectByPrimaryKey(id));
     }
 
-    @PostMapping("insert")
+    @PostMapping("/insert")
     @ApiOperation(value = "新增数据", notes = "新增数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:dept:add')")
     public R<String> insert(@RequestBody Dept dept) {
@@ -43,7 +43,7 @@ public class DeptController {
         return new CompareExecute<>().compare(deptService.insert(dept), CompareExecute.ExecuteStatus.INSERT);
     }
 
-    @PutMapping("update")
+    @PutMapping("/update")
     @ApiOperation(value = "修改数据", notes = "修改数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:dept:edit')")
     public R<String> update(@RequestBody Dept dept) {
@@ -59,7 +59,7 @@ public class DeptController {
         return new CompareExecute<>().compare(deptService.update(dept), CompareExecute.ExecuteStatus.UPDATE);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "删除数据", notes = "删除数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:dept:delete')")
     public R<String> delete(@PathVariable(value = "id") String id) {
@@ -72,7 +72,7 @@ public class DeptController {
         return new CompareExecute<>().compare(deptService.delete(id), CompareExecute.ExecuteStatus.DELETE);
     }
 
-    @GetMapping("select/exclude/{id}")
+    @GetMapping("/select/exclude/{id}")
     @ApiOperation(value = "排除指定节点", notes = "排除指定节点")
     @PreAuthorize("@permissionCheck.hasPermissions('system:dept:list')")
     public R<List<DeptVo>> selectExclude(@PathVariable(value = "id") String id) {
@@ -82,14 +82,14 @@ public class DeptController {
         return new R<List<DeptVo>>().ok(deptVoList);
     }
 
-    @GetMapping("tree")
+    @GetMapping("/tree")
     @ApiOperation(value = "树形结构", notes = "树形结构")
     @PreAuthorize("@permissionCheck.hasPermissions('system:dept:list')")
     public R<List<DeptVo>> tree() {
         return new R<List<DeptVo>>().ok(deptService.tree(deptService.selectList(new Dept().setStatus(DeptKey.IS_USED).setDeleteStatus(DeptKey.IS_NOT_DELETE))));
     }
 
-    @GetMapping("role/tree/{roleId}")
+    @GetMapping("/role/tree/{roleId}")
     @ApiOperation(value = "加载对应角色部门列表树", notes = "加载对应角色部门列表树")
     @PreAuthorize("@permissionCheck.hasPermissions('system:dept:list')")
     public R<List<DeptVo>> roleTree(@PathVariable(value = "roleId") String roleId) {

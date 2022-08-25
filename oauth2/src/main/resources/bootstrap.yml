@@ -1,3 +1,5 @@
+
+
 spring:
   application:
     name: oauth2
@@ -6,6 +8,9 @@ spring:
     active: dev
 
   cloud:
+    inetutils:
+      preferred-networks: 192.168.43
+
     nacos:
       config:
         file-extension: yaml
@@ -17,7 +22,7 @@ spring:
         server-addr: 47.103.56.186:8848
         namespace: 13c41066-5dd8-4570-bb0a-23b7ed95a10a
         group: dev
-        ephemeral: false
+        ephemeral: true
 
     sentinel:
       transport:
@@ -48,3 +53,6 @@ feign:
   oauth2:
     enabled: true
     load-balanced: true
+
+server:
+  address: 192.168.43.186

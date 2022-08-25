@@ -50,14 +50,14 @@ public class RoleController {
     @Autowired
     private StaffConvert staffConvert;
 
-    @GetMapping("select/{id}")
+    @GetMapping("/select/{id}")
     @ApiOperation(value = "通过主键查询单条数据", notes = "通过主键查询单条数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:query')")
     public R<RoleVo> selectOne(@PathVariable(value = "id") String id) {
         return new R<RoleVo>().ok(roleService.selectByPrimaryKey(id));
     }
 
-    @GetMapping("select")
+    @GetMapping("/select")
     @ApiOperation(value = "查询所有数据", notes = "查询所有数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:list')")
     public PageR<List<RoleVo>> selectList(RoleParam roleParam) {
@@ -66,7 +66,7 @@ public class RoleController {
                 .setCount(postIPage.getTotal());
     }
 
-    @PostMapping("insert")
+    @PostMapping("/insert")
     @ApiOperation(value = "新增数据", notes = "新增数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:add')")
     public R<String> insert(@RequestBody Role role) {
@@ -79,7 +79,7 @@ public class RoleController {
         return new CompareExecute<>().compare(roleService.insert(role), CompareExecute.ExecuteStatus.INSERT);
     }
 
-    @PutMapping("update")
+    @PutMapping("/update")
     @ApiOperation(value = "修改数据", notes = "修改数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:edit')")
     public R<String> update(@RequestBody Role role) {
@@ -107,7 +107,7 @@ public class RoleController {
         return new R<String>().ok();
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "删除数据", notes = "删除数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:delete')")
     public R<String> delete(@PathVariable(value = "id") String id) {
@@ -115,7 +115,7 @@ public class RoleController {
         return new CompareExecute<>().compare(roleService.delete(id), CompareExecute.ExecuteStatus.DELETE);
     }
 
-    @PutMapping("update/permission")
+    @PutMapping("/update/permission")
     @ApiOperation(value = "修改保存数据权限", notes = "修改保存数据权限")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:edit')")
     public R<String> updatePermission(@RequestBody RoleParam roleParam) {
@@ -123,7 +123,7 @@ public class RoleController {
         return new CompareExecute<>().compare(roleService.authDataScope(roleParam), roleParam.getDeptIdList().size(), CompareExecute.ExecuteStatus.UPDATE);
     }
 
-    @PutMapping("update/status")
+    @PutMapping("/update/status")
     @ApiOperation(value = "状态修改", notes = "状态修改")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:edit')")
     public R<String> updateStatus(@RequestBody Role role) {
@@ -133,7 +133,7 @@ public class RoleController {
                 .setId(role.getId())), CompareExecute.ExecuteStatus.UPDATE);
     }
 
-    @GetMapping("select/select")
+    @GetMapping("/select/select")
     @ApiOperation(value = "获取角色选择框列表", notes = "获取角色选择框列表")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:list')")
     public R<List<RoleVo>> selectSelect() {
@@ -142,7 +142,7 @@ public class RoleController {
                 .setStatus(RoleKey.IS_USED)));
     }
 
-    @GetMapping("select/assigned")
+    @GetMapping("/select/assigned")
     @ApiOperation(value = "已分配用户角色列表", notes = "已分配用户角色列表")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:list')")
     public PageR<List<StaffVo>> selectAssigned(@RequestBody StaffParam staffParam) {
@@ -151,7 +151,7 @@ public class RoleController {
                 .setCount(staffIPage.getTotal());
     }
 
-    @GetMapping("select/unassigned")
+    @GetMapping("/select/unassigned")
     @ApiOperation(value = "已分配用户角色列表", notes = "已分配用户角色列表")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:list')")
     public PageR<List<StaffVo>> selectUnAssigned(@RequestBody StaffParam staffParam) {
@@ -160,21 +160,21 @@ public class RoleController {
                 .setCount(staffIPage.getTotal());
     }
 
-    @PutMapping("cancel/assign")
+    @PutMapping("/cancel/assign")
     @ApiOperation(value = "取消授权用户", notes = "取消授权用户")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:edit')")
     public R<String> cancelAssign(@RequestBody StaffRole staffRole) {
         return new CompareExecute<>().compare(roleService.cancelAssign(staffRole), CompareExecute.ExecuteStatus.UPDATE);
     }
 
-    @PutMapping("cancel/assign/batch")
+    @PutMapping("/cancel/assign/batch")
     @ApiOperation(value = "批量取消授权用户", notes = "批量取消授权用户")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:edit')")
     public R<String> cancelAssignBatch(@RequestBody RoleParam roleParam) {
         return new CompareExecute<>().compare(roleService.cancelAssignBatch(roleParam.getId(), roleParam.getStaffIdList()), roleParam.getStaffIdList().size(), CompareExecute.ExecuteStatus.UPDATE);
     }
 
-    @PutMapping("assign/batch")
+    @PutMapping("/assign/batch")
     @ApiOperation(value = "批量选择用户授权", notes = "批量选择用户授权")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:edit')")
     public R<String> assignBatch(@RequestBody RoleParam roleParam) {

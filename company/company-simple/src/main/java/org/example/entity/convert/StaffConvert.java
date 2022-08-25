@@ -13,6 +13,7 @@ import org.example.mapper.StaffRoleMapper;
 import org.example.util.Convert;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +38,7 @@ public abstract class StaffConvert implements Convert<Staff, StaffVo> {
     public abstract List<StaffVo> convert(List<Staff> staffList);
 
     @AfterMapping
-    public void convert(Staff staff, StaffVo staffVo) {
+    public void convert(Staff staff, @MappingTarget StaffVo staffVo) {
         staffVo.setCreateStaff(staffMapper.selectOne(new LambdaQueryWrapper<Staff>()
                 .eq(Staff::getId, staffVo.getCreateStaffId())))
                 .setDept(deptMapper.selectOne(new LambdaQueryWrapper<Dept>()
@@ -51,7 +52,7 @@ public abstract class StaffConvert implements Convert<Staff, StaffVo> {
     }
 
     @AfterMapping
-    public void convert(List<Staff> staffList, List<StaffVo> staffVoList) {
+    public void convert(List<Staff> staffList, @MappingTarget List<StaffVo> staffVoList) {
         staffVoList.forEach(v -> convert(null, v));
     }
 }

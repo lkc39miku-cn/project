@@ -29,14 +29,14 @@ public class StaffController {
     @Autowired
     private StaffConvert staffConvert;
 
-    @GetMapping("select/{id}")
+    @GetMapping("/select/{id}")
     @ApiOperation(value = "通过主键查询单条数据", notes = "通过主键查询单条数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:query')")
     public R<StaffVo> selectOne(@PathVariable(value = "id") String id) {
         return new R<StaffVo>().ok(staffService.selectByPrimaryKey(id));
     }
 
-    @GetMapping("select")
+    @GetMapping("/select")
     @ApiOperation(value = "查询数据", notes = "查询数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:list')")
     public PageR<List<StaffVo>> selectList(StaffParam staffParam) {
@@ -45,7 +45,7 @@ public class StaffController {
                 .setCount(staffIPage.getTotal());
     }
 
-    @PostMapping("insert")
+    @PostMapping("/insert")
     @ApiOperation(value = "添加数据", notes = "添加数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:add')")
     public R<String> insert(Staff staff) {
@@ -62,7 +62,7 @@ public class StaffController {
         return new CompareExecute<>().compare(staffService.insert(staff), CompareExecute.ExecuteStatus.INSERT);
     }
 
-    @PutMapping("update")
+    @PutMapping("/update")
     @ApiOperation(value = "修改数据", notes = "修改数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:edit')")
     public R<String> update(Staff staff) {
@@ -79,7 +79,7 @@ public class StaffController {
         return new CompareExecute<>().compare(staffService.update(staff), CompareExecute.ExecuteStatus.UPDATE);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "删除数据", notes = "删除数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:delete')")
     public R<String> delete(@PathVariable(value = "id") String id) {
@@ -87,7 +87,7 @@ public class StaffController {
         return new CompareExecute<>().compare(staffService.delete(id), CompareExecute.ExecuteStatus.DELETE);
     }
 
-    @PutMapping("update/password")
+    @PutMapping("/update/password")
     @ApiOperation(value = "修改密码", notes = "修改密码")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:edit')")
     public R<String> updatePassword(Staff staff) {
@@ -98,7 +98,7 @@ public class StaffController {
                 .setId(staff.getId())), CompareExecute.ExecuteStatus.UPDATE);
     }
 
-    @PutMapping("update/status")
+    @PutMapping("/update/status")
     @ApiOperation(value = "状态修改", notes = "状态修改")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:edit')")
     public R<String> updateStatus(Staff staff) {
@@ -108,14 +108,14 @@ public class StaffController {
                 .setId(staff.getId())), CompareExecute.ExecuteStatus.UPDATE);
     }
 
-    @GetMapping("get/role/{id}")
+    @GetMapping("/get/role/{id}")
     @ApiOperation(value = "获取已授权角色", notes = "获取已授权角色")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:list')")
     public R<StaffVo> getRole(@PathVariable(value = "id") String id) {
         return new R<StaffVo>().ok(staffService.selectByPrimaryKey(id));
     }
 
-    @PutMapping("update/role/{id}")
+    @PutMapping("/update/role/{id}")
     @ApiOperation(value = "授权角色", notes = "授权角色")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:edit')")
     public R<String> updateRole(@RequestBody StaffParam staffParam) {

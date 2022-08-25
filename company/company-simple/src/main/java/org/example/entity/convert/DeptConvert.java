@@ -8,6 +8,7 @@ import org.example.util.Convert;
 import org.example.entity.vo.DeptVo;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,7 @@ public abstract class DeptConvert implements Convert<Dept, DeptVo> {
     public abstract List<DeptVo> convert(List<Dept> deptList);
 
     @AfterMapping
-    public void convert(Dept dept, DeptVo deptVo) {
+    public void convert(Dept dept, @MappingTarget DeptVo deptVo) {
         deptVo.setCreateStaff(staffMapper.selectOne(new LambdaQueryWrapper<Staff>()
                 .eq(Staff::getId, deptVo.getCreateStaffId())))
               .setLeaderStaff(staffMapper.selectOne(new LambdaQueryWrapper<Staff>()
@@ -32,7 +33,7 @@ public abstract class DeptConvert implements Convert<Dept, DeptVo> {
     }
 
     @AfterMapping
-    public void convert(List<Dept> deptList, List<DeptVo> deptVoList) {
+    public void convert(List<Dept> deptList, @MappingTarget List<DeptVo> deptVoList) {
         deptVoList.forEach(v -> convert(null, v));
     }
 }

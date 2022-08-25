@@ -27,14 +27,14 @@ public class PostController {
     @Autowired
     private PostConvert postConvert;
 
-    @GetMapping("select/{id}")
+    @GetMapping("/select/{id}")
     @ApiOperation(value = "通过主键查询单条数据", notes = "通过主键查询单条数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:post:query')")
     public R<PostVo> selectOne(@PathVariable(value = "id") String id) {
         return new R<PostVo>().ok(postService.selectByPrimaryKey(id));
     }
 
-    @GetMapping("select")
+    @GetMapping("/select")
     @ApiOperation(value = "查询所有数据", notes = "查询所有数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:post:list')")
     public PageR<List<PostVo>> selectList(PostParam postParam) {
@@ -43,14 +43,14 @@ public class PostController {
                 .setCount(postIPage.getTotal());
     }
 
-    @GetMapping("select/all")
+    @GetMapping("/select/all")
     @ApiOperation(value = "选择框", notes = "选择框")
     @PreAuthorize("@permissionCheck.hasPermissions('system:post:list')")
     public R<List<PostVo>> selectBox() {
         return new R<List<PostVo>>().ok(postService.selectAll());
     }
 
-    @PostMapping("insert")
+    @PostMapping("/insert")
     @ApiOperation(value = "添加数据", notes = "添加数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:post:add')")
     public R<String> insert(Post post) {
@@ -64,7 +64,7 @@ public class PostController {
         return new CompareExecute<>().compare(postService.insert(post), CompareExecute.ExecuteStatus.INSERT);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "删除数据", notes = "删除数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:post:delete')")
     public R<String> delete(@PathVariable(value = "id") String id) {
@@ -74,7 +74,7 @@ public class PostController {
         return new CompareExecute<>().compare(postService.delete(id), CompareExecute.ExecuteStatus.DELETE);
     }
 
-    @PutMapping("update")
+    @PutMapping("/update")
     @ApiOperation(value = "更新数据", notes = "更新数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:post:update')")
     public R<String> update(Post post) {
