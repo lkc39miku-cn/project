@@ -23,14 +23,14 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-    @GetMapping("select/{id}")
+    @GetMapping("/select/{id}")
     @ApiOperation(value = "通过主键查询单条数据", notes = "通过主键查询单条数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:menu:query')")
     public R<MenuVo> selectOne(@PathVariable(value = "id") String id) {
         return new R<MenuVo>().ok(menuService.selectByPrimaryKey(id));
     }
 
-    @PostMapping("insert")
+    @PostMapping("/insert")
     @ApiOperation(value = "新增数据", notes = "新增数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:menu:add')")
     public R<String> insert(@RequestBody Menu menu) {
@@ -44,7 +44,7 @@ public class MenuController {
         return new CompareExecute<>().compare(menuService.insert(menu), CompareExecute.ExecuteStatus.INSERT);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "删除数据", notes = "删除数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:menu:delete')")
     public R<String> delete(@PathVariable(value = "id") String id) {
@@ -57,7 +57,7 @@ public class MenuController {
         return new CompareExecute<>().compare(menuService.delete(id), CompareExecute.ExecuteStatus.DELETE);
     }
 
-    @PutMapping("update")
+    @PutMapping("/update")
     @ApiOperation(value = "修改数据", notes = "修改数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:menu:update')")
     public R<String> update(@RequestBody Menu menu) {
@@ -73,7 +73,7 @@ public class MenuController {
         return new CompareExecute<>().compare(menuService.update(menu), CompareExecute.ExecuteStatus.UPDATE);
     }
 
-    @GetMapping("tree")
+    @GetMapping("/tree")
     @ApiOperation(value = "树形菜单", notes = "树形菜单")
     @PreAuthorize("@permissionCheck.hasPermissions('system:menu:list')")
     public R<List<MenuVo>> tree() {
@@ -81,7 +81,7 @@ public class MenuController {
                 .setStatus(MenuKey.IS_USED))));
     }
 
-    @GetMapping("role/tree/{roleId}")
+    @GetMapping("/role/tree/{roleId}")
     @ApiOperation(value = "加载对应角色菜单列表树", notes = "加载对应角色菜单列表树")
     @PreAuthorize("@permissionCheck.hasPermissions('system:menu:list')")
     public R<List<MenuVo>> roleTree(@PathVariable(value = "roleId") String roleId) {

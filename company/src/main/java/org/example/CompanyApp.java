@@ -9,9 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 @SpringBootApplication
-@EnableFeignClients
 @EnableResourceServer
-@MapperScan("org.example.mapper")
 public class CompanyApp {
     public static void main(String[] args) {
         SpringApplication.run(CompanyApp.class, args);

@@ -6,6 +6,9 @@ spring:
     active: dev
 
   cloud:
+    inetutils:
+      preferred-networks: 192.168.43
+
     nacos:
       config:
         file-extension: yaml
@@ -14,10 +17,10 @@ spring:
         group: dev
 
       discovery:
-        server-addr: 47.103.56.186:8848
-        namespace: 13c41066-5dd8-4570-bb0a-23b7ed95a10a
-        group: dev
-        ephemeral: false
+            server-addr: 47.103.56.186:8848
+            namespace: 13c41066-5dd8-4570-bb0a-23b7ed95a10a
+            group: dev
+            ephemeral: false
 
     sentinel:
       transport:
@@ -37,12 +40,21 @@ spring:
     password: 123456
 
 security:
+  signing-key: web
+
   oauth2:
     client:
       client-id: web
       client-secret: 123456
 
+    resource:
+      jwt:
+        key-value: web
+
 feign:
   oauth2:
     enabled: true
     load-balanced: true
+
+server:
+  address: 192.168.43.186

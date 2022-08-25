@@ -1,6 +1,6 @@
 spring:
   application:
-    name: company
+    name: music-backstage
 
   profiles:
     active: dev
@@ -17,10 +17,10 @@ spring:
         group: dev
 
       discovery:
-        server-addr: 47.103.56.186:8848
-        namespace: 13c41066-5dd8-4570-bb0a-23b7ed95a10a
-        group: dev
-        ephemeral: true
+            server-addr: 47.103.56.186:8848
+            namespace: 13c41066-5dd8-4570-bb0a-23b7ed95a10a
+            group: dev
+            ephemeral: false
 
     sentinel:
       transport:

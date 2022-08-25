@@ -1,14 +1,15 @@
 package org.example;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 @SpringBootApplication
-@EnableResourceServer
-public class MusicApp {
+@EnableFeignClients
+@MapperScan("org.example.mapper")
+public class Oauth2UserApp {
     public static void main(String[] args) {
-        SpringApplication.run(MusicApp.class,args);
+        SpringApplication.run(Oauth2UserApp.class, args);
     }
 }

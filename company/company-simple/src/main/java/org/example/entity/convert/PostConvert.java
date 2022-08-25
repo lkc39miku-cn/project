@@ -8,6 +8,7 @@ import org.example.mapper.StaffMapper;
 import org.example.util.Convert;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,13 +25,13 @@ public abstract class PostConvert implements Convert<Post, PostVo> {
     public abstract List<PostVo> convert(List<Post> postList);
 
     @AfterMapping
-    public void convert(Post post, PostVo postVo) {
+    public void convert(Post post, @MappingTarget PostVo postVo) {
         postVo.setCreateStaff(staffMapper.selectOne(new LambdaQueryWrapper<Staff>()
                 .eq(Staff::getId, postVo.getCreateStaffId())));
     }
 
     @AfterMapping
-    public void convert(List<Post> postList, List<PostVo> postVoList) {
+    public void convert(List<Post> postList, @MappingTarget List<PostVo> postVoList) {
         postVoList.forEach(v -> convert(null, v));
     }
 }
