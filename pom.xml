@@ -26,6 +26,7 @@
         <module>shop</module>
         <module>shop-backstage</module>
         <module>shop-entity</module>
+        <module>music-entity</module>
     </modules>
 
     <properties>

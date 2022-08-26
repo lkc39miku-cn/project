@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>music-backstage</artifactId>
+    <artifactId>music-entity</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,22 +19,26 @@
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>
-            <artifactId>oauth2</artifactId>
+            <artifactId>jpa</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.example</groupId>
-            <artifactId>music-entity</artifactId>
+            <artifactId>swagger</artifactId>
             <version>1.0-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.example</groupId>
-                    <artifactId>jpa</artifactId>
+                    <artifactId>commons</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>org.example</groupId>
-                    <artifactId>swagger</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-context</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

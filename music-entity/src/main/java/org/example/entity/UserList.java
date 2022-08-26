@@ -29,5 +29,6 @@ public class UserList implements Serializable {
     private String listId;
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "歌单收藏时间")
     private LocalDateTime createTime;
 }
