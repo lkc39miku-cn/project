@@ -9,30 +9,26 @@ import org.example.constants.BaseEntity;
 
 import java.io.Serial;
 
-@ApiModel(value="品牌类型")
+@ApiModel(value="商品类型")
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 public class CommodityType extends BaseEntity {
+
     @Serial
-    private static final long serialVersionUID = 8972663260988954031L;
+    private static final long serialVersionUID = -2075588412939772202L;
+    @ApiModelProperty(value = "商品类型名称")
+    protected String name;
 
-    @ApiModelProperty(value = "品牌类型名称")
-    private String name;
-
-    @ApiModelProperty(value = "显示状态")
-    private String publishStatus;
+    @ApiModelProperty(value = "显示状态 0 不显示 1 显示")
+    protected Integer publishStatus;
 
     @ApiModelProperty(value = "排序")
-    private String Sort;
+    protected Integer sort;
 
     @ApiModelProperty(value = "图标")
-    private String icon;
+    protected String icon;
 
-    @ApiModelProperty(value = "上级类型")
-    private String parentId;
-
-    @ApiModelProperty(value = "判断是否为类型")
-    private String isType;
-
+    @ApiModelProperty(value = "上级类型 0表示没有上级类型")
+    protected String parentId;
 }

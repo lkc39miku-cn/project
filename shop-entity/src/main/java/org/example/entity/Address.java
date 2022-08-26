@@ -7,19 +7,20 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.example.constants.BaseEntity;
 import java.io.Serial;
+import java.io.Serializable;
 
 @ApiModel(value="地址")
 @Data
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
-public class Address extends BaseEntity{
+public class Address implements Serializable {
+
     @Serial
-    private static final long serialVersionUID = 8972663260988954031L;
+    private static final long serialVersionUID = 7287153707164496373L;
 
     @ApiModelProperty(value = "地址名称")
-    private String name;
+    protected String name;
 
-    @ApiModelProperty(value = "地址的上级0表示无上级")
-    private String parentId;
+    @ApiModelProperty(value = "地址的上级 0 表示无上级")
+    protected String parentId;
 
 }

@@ -14,31 +14,31 @@ import java.io.Serial;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 public class CommodityComment extends BaseEntity {
-    @Serial
-    private static final long serialVersionUID = 8972663260988954031L;
 
+    @Serial
+    private static final long serialVersionUID = -5271517374757102893L;
     @ApiModelProperty(value = "商品id")
-    private String commodityId;
+    protected String commodityId;
 
     @ApiModelProperty(value = "用户id")
-    private String userId;
+    protected String userId;
 
     @ApiModelProperty(value = "评论内容")
-    private String context;
+    protected String context;
 
     @ApiModelProperty(value = "评论图片")
-    private String contextImg;
+    protected String contextImg;
 
     @ApiModelProperty(value = "回复人id")
-    private String toUserId;
+    protected String toUserId;
 
-    @ApiModelProperty(value = "显示状态")
-    private String publishStatus;
+    @ApiModelProperty(value = "显示状态 0 不显示 1 显示")
+    protected Integer publishStatus;
 
-    @ApiModelProperty(value = "删除状态")
-    private String deleteStatus;
+    @ApiModelProperty(value = "删除状态 0 未删除 1 已删除")
+    protected Integer deleteStatus;
 
-    @ApiModelProperty(value = "上级评论的编号")
-    private String parentId;
+    @ApiModelProperty(value = "上级评论的编号 0表示没有上级评论")
+    protected String parentId;
 
 }

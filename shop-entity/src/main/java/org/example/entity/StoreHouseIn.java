@@ -7,29 +7,29 @@ import lombok.experimental.Accessors;
 import org.example.constants.BaseEntity;
 import java.io.Serial;
 
-@ApiModel(value="仓库的进货记录表")
+@ApiModel(value="仓库进货记录表")
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 public class StoreHouseIn extends BaseEntity{
-    @Serial
-    private static final long serialVersionUID = 8972663260988954031L;
 
+    @Serial
+    private static final long serialVersionUID = -2212956949948704040L;
     @ApiModelProperty(value = "商品id")
-    private String commodityId;
+    protected String commodityId;
 
     @ApiModelProperty(value = "预计进货数量")
-    private String inNumber;
+    protected Integer inNumber;
 
     @ApiModelProperty(value = "实际进货数量")
-    private String realInNumber;
+    protected Integer realInNumber;
 
     @ApiModelProperty(value = "备注")
-    private String storeHouseInInfo;
+    protected String storeHouseInInfo;
 
-    @ApiModelProperty(value = "入库状态")
-    private String storeHouseInStatus;
+    @ApiModelProperty(value = "入库状态 0 未入库 1 已入库")
+    protected Integer storeHouseInStatus;
 
-    @ApiModelProperty(value = "删除状态")
-    private String deleteStatus;
+    @ApiModelProperty(value = "删除状态 0 未删除 1 已删除")
+    protected Integer deleteStatus;
 }

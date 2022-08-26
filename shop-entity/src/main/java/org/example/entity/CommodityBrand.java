@@ -14,25 +14,25 @@ import java.io.Serial;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 public class CommodityBrand extends BaseEntity {
-    @Serial
-    private static final long serialVersionUID = 8972663260988954031L;
 
+    @Serial
+    private static final long serialVersionUID = -2012782948290074235L;
     @ApiModelProperty(value = "商品品牌名称")
-    private String name;
+    protected String name;
 
     @ApiModelProperty(value = "商品品牌首字母")
-    private String firstLetter;
+    protected String firstLetter;
 
-    @ApiModelProperty(value = "显示状态")
-    private String publishStatus;
+    @ApiModelProperty(value = "显示状态 0 不显示 1 显示")
+    protected Integer publishStatus;
 
     @ApiModelProperty(value = "品牌logo")
-    private String logo;
+    protected String logo;
 
     @ApiModelProperty(value = "专区大图")
-    private String bigLogo;
+    protected String bigLogo;
 
     @ApiModelProperty(value = "品牌故事")
-    private String description;
+    protected String description;
 
 }

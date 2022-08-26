@@ -7,39 +7,40 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.example.constants.BaseEntity;
 import java.io.Serial;
+import java.math.BigDecimal;
 
 @ApiModel(value="订单明细")
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class OrderInfo extends BaseEntity{
-    @Serial
-    private static final long serialVersionUID = 8972663260988954031L;
+public class OrderInfo extends BaseEntity {
 
+    @Serial
+    private static final long serialVersionUID = -5530202041334625891L;
     @ApiModelProperty(value = "用户id")
-    private String orderId;
+    protected String orderId;
 
     @ApiModelProperty(value = "商品id")
-    private String commodityId;
+    protected String commodityId;
 
     @ApiModelProperty(value = "商品单价")
-    private String price;
+    protected BigDecimal price;
 
     @ApiModelProperty(value = "商品数量")
-    private String number;
+    protected Integer number;
 
-    @ApiModelProperty(value = "商品总量")
-    private String allPrice;
+    @ApiModelProperty(value = "商品总价")
+    protected BigDecimal allPrice;
 
-    @ApiModelProperty(value = "用户的地址id")
-    private String userAddressId;
+    @ApiModelProperty(value = "用户地址id")
+    protected String userAddressId;
 
-    @ApiModelProperty(value = "订单状态id")
-    private String orderTypeId;
+    @ApiModelProperty(value = "订单状态")
+    protected Integer orderType;
 
-    @ApiModelProperty(value = "显示状态")
-    private String publishStatus;
+    @ApiModelProperty(value = "显示状态 0 不显示 1 显示")
+    protected Integer publishStatus;
 
-    @ApiModelProperty(value = "删除状态")
-    private String deleteStatus;
+    @ApiModelProperty(value = "删除状态 0 未删除 1 已删除")
+    protected Integer deleteStatus;
 }

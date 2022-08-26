@@ -6,31 +6,31 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.example.constants.BaseEntity;
 import java.io.Serial;
+import java.time.LocalDateTime;
 
-@ApiModel(value="用户的评论状态")
+@ApiModel(value="用户评论状态")
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class UserCommentStatus extends BaseEntity{
+public class UserCommentStatus extends BaseEntity {
+
     @Serial
-    private static final long serialVersionUID = 8972663260988954031L;
-
-
+    private static final long serialVersionUID = 4939566083506442052L;
     @ApiModelProperty(value = "用户id")
-    private String userId;
+    protected String userId;
 
-    @ApiModelProperty(value = "用户评论状态")
-    private String commentStatus;
+    @ApiModelProperty(value = "用户评论状态 0 正常 1 禁用")
+    protected Integer commentStatus;
 
     @ApiModelProperty(value = "禁用提示")
-    private String commentInfo;
+    protected String commentInfo;
 
     @ApiModelProperty(value = "禁言开始时间")
-    private String commentStartTime;
+    protected LocalDateTime commentStartTime;
 
     @ApiModelProperty(value = "禁言结束时间")
-    private String commentEndTime;
+    protected LocalDateTime commentEndTime;
 
     @ApiModelProperty(value = "操作人id")
-    private String StaffId;
+    protected String StaffId;
 }

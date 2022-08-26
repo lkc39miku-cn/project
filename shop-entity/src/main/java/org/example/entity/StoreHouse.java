@@ -11,22 +11,23 @@ import java.io.Serial;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class StoreHouse extends BaseEntity{
+public class StoreHouse extends BaseEntity {
+
     @Serial
-    private static final long serialVersionUID = 8972663260988954031L;
+    private static final long serialVersionUID = -5611563626807365662L;
 
     @ApiModelProperty(value = "商品id")
-    private String commodityId;
+    protected String commodityId;
 
     @ApiModelProperty(value = "商品库存")
-    private String stock;
+    protected Integer stock;
 
     @ApiModelProperty(value = "商品库存预警值")
-    private String lowStock;
+    protected Integer lowStock;
 
     @ApiModelProperty(value = "商品库存描述")
-    private String storeHouseInfo;
+    protected String storeHouseInfo;
 
-    @ApiModelProperty(value = "删除状态")
-    private String deleteStatus;
+    @ApiModelProperty(value = "删除状态 0 未删除 1 已删除")
+    protected Integer deleteStatus;
 }

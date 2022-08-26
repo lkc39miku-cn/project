@@ -12,31 +12,31 @@ import java.io.Serial;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class StoreHouseOut extends BaseEntity{
-    @Serial
-    private static final long serialVersionUID = 8972663260988954031L;
+public class StoreHouseOut extends BaseEntity {
 
+    @Serial
+    private static final long serialVersionUID = 2847799636159860685L;
     @ApiModelProperty(value = "仓库id")
-    private String storeHouesId;
+    protected String storeHouseId;
 
     @ApiModelProperty(value = "预计出货数量")
-    private String outNumber;
+    protected Integer outNumber;
 
     @ApiModelProperty(value = "实际出货数量")
-    private String realOutNumber;
+    protected Integer realOutNumber;
 
     @ApiModelProperty(value = "备注")
-    private String storeHouseOutInfo;
+    protected String storeHouseOutInfo;
 
-    @ApiModelProperty(value = "出库状态")
-    private String storeHouseOutStatus;
+    @ApiModelProperty(value = "出库状态 0 未出库 1 已出库")
+    protected Integer storeHouseOutStatus;
 
-    @ApiModelProperty(value = "删除状态")
-    private String deleteStatus;
+    @ApiModelProperty(value = "删除状态 0 未删除 1 已删除")
+    protected Integer deleteStatus;
 
-    @ApiModelProperty(value = "审核人")
-    private String staddId;
+    @ApiModelProperty(value = "审核人id")
+    protected String staffId;
 
-    @ApiModelProperty(value = "提交人")
-    private String targetId;
+    @ApiModelProperty(value = "提交人id ")
+    protected String targetId;
 }
