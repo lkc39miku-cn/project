@@ -57,17 +57,26 @@ public class Commodity extends BaseEntity {
     @ApiModelProperty(value = "发售时间")
     private String saleStartTime;
 
-    @ApiModelProperty(value = "商品促销价格")
+    @ApiModelProperty(value = "商品秒杀价格")
     private String promotionPrice;
 
-    @ApiModelProperty(value = "商品促销的类型")
+    @ApiModelProperty(value = "商品秒杀的类型")
     private String promtionType;
 
-    @ApiModelProperty(value = "商品促销的开始时间")
+    @ApiModelProperty(value = "商品秒杀的开始时间")
     private String promtionStartTime;
 
-    @ApiModelProperty(value = "商品促销的结束时间")
+    @ApiModelProperty(value = "商品秒杀的结束时间")
     private String promtionEndTime;
+
+    @ApiModelProperty(value = "商品秒杀的数量")
+    private String promotionSeckillNumber;
+
+    @ApiModelProperty(value = "商品秒杀的状态(0:开启秒杀1:没有开启秒杀)")
+    private String promotionSeckillStatus;
+
+    @ApiModelProperty(value = "仓库id")
+    private String storeHouseId;
 
     @ApiModelProperty(value = "上架状态")
     private String publishStatus;
