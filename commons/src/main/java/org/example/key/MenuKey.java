@@ -7,4 +7,7 @@ public interface MenuKey {
     Integer IS_NOT_USED = 1;
     Integer IS_SHOW = 0;
     Integer IS_NOT_SHOW = 1;
+
+    String REDIS_SELECT_ID_KEY = "dept:select:id:";
+    String REDIS_TREE = "dept:tree";
 }
