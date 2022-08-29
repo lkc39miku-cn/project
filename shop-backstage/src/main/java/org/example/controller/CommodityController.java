@@ -22,13 +22,6 @@ public class CommodityController {
     @Autowired
     private CommodityConvert commodityConvert;
 
-    @GetMapping(value = "/select")
-    public PageR<List<CommodityVo>> select(CommodityParam commodityParam) {
-        IPage<Commodity> iPage = commodityService.selectListByPage(commodityParam);
-        return new PageR<List<CommodityVo>>().ok(commodityConvert.convert(iPage.getRecords()))
-                .setCount(iPage.getTotal());
-    }
-
     @PostMapping("/insert")
     public R<String> insert(@RequestBody Commodity commodity) {
         return new CompareExecute<>().compare(commodityService.insert(commodity), CompareExecute.ExecuteStatus.INSERT);
