@@ -28,19 +28,4 @@ public class CommodityController {
         return new PageR<List<CommodityVo>>().ok(commodityConvert.convert(iPage.getRecords()))
                 .setCount(iPage.getTotal());
     }
-
-    @PostMapping("/insert")
-    public R<String> insert(@RequestBody Commodity commodity) {
-        return new CompareExecute<>().compare(commodityService.insert(commodity), CompareExecute.ExecuteStatus.INSERT);
-    }
-
-    @PutMapping("/update")
-    public R<String> update(@RequestBody Commodity commodity) {
-        return new CompareExecute<>().compare(commodityService.update(commodity), CompareExecute.ExecuteStatus.UPDATE);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public R<String> delete(@PathVariable("id") String id) {
-        return new CompareExecute<>().compare(commodityService.delete(id), CompareExecute.ExecuteStatus.DELETE);
-    }
 }
