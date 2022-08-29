@@ -20,40 +20,48 @@ public class User implements Serializable {
     private static final long serialVersionUID = 7174154087368025294L;
 
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private String id;
+    protected String id;
 
     @TableField(value = "name")
     @ApiModelProperty(value = "用户名")
-    private String name;
+    protected String name;
 
     @TableField(value = "account")
     @ApiModelProperty(value = "用户账号")
-    private String account;
+    protected String account;
 
     @TableField(value = "password")
     @ApiModelProperty(value = "用户密码")
-    private String password;
+    protected String password;
 
     @TableField(value = "phone")
     @ApiModelProperty(value = "用户手机号")
-    private String phone;
+    protected String phone;
 
     @TableField(value = "area")
     @ApiModelProperty(value = "用户地区")
-    private String area;
+    protected String area;
 
     @TableField(value = "gender")
     @ApiModelProperty(value = "性别 0 男 1 女 2 未知")
-    private Integer gender;
+    protected Integer gender;
 
     @TableField(value = "birth")
     @ApiModelProperty(value = "生日")
-    private LocalDateTime birth;
+    protected LocalDateTime birth;
 
     @TableField(value = "photo")
     @ApiModelProperty(value = "用户头像")
-    private String photo;
+    protected String photo;
+
+    @ApiModelProperty(value = "禁用状态 0 启用 1 禁用")
+    @TableField(value = "status")
+    protected Integer status;
+
+    @ApiModelProperty(value = "删除状态 0 未删除 1 已删除")
+    @TableField(value = "delete_status")
+    protected Integer deleteStatus;
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    protected LocalDateTime createTime;
 }

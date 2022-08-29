@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>shop-backstage</artifactId>
+    <artifactId>order</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,13 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>
-            <artifactId>oauth2</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>shop-entity</artifactId>
+            <artifactId>oauth2-user</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
