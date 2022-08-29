@@ -48,7 +48,7 @@ public class Commodity extends BaseEntity {
     protected String commodityTypeId;
 
     @ApiModelProperty(value = "商品预售截止时间")
-    protected LocalDateTime previewEndTiml;
+    protected LocalDateTime previewEndTime;
 
     @ApiModelProperty(value = "预售说明")
     protected String previewInfo;

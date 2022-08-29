@@ -13,6 +13,7 @@ import org.example.mapper.MenuMapper;
 import org.example.mapper.RoleMapper;
 import org.example.mapper.RoleMenuMapper;
 import org.example.service.MenuService;
+import org.example.util.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,8 @@ public class MenuServiceImpl implements MenuService {
     private RoleMapper roleMapper;
     @Autowired
     private MenuConvert menuConvert;
+    @Autowired
+    private RedisCache redisCache;
 
     @Override
     public Set<String> selectMenuPermsByStaffId(String id) {
@@ -40,7 +43,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public MenuVo selectByPrimaryKey(String id) {
-        return menuConvert.convert(menuMapper.selectById(id));
+        MenuVo menuVo = menuConvert.convert(menuMapper.selectById(id));
+        redisCache.setCacheObject(MenuKey.REDIS_SELECT_ID_KEY + id, menuVo);
+        if (menuVo == null) {
+            redisCache.expire(MenuKey.REDIS_SELECT_ID_KEY + id, 5 * 60);
+        }
+        return menuVo;
     }
 
     @Override

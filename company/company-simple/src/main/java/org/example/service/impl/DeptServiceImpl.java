@@ -12,6 +12,7 @@ import org.example.mapper.DeptMapper;
 import org.example.mapper.RoleMapper;
 import org.example.mapper.StaffMapper;
 import org.example.service.DeptService;
+import org.example.util.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,15 +31,28 @@ public class DeptServiceImpl implements DeptService {
     private RoleMapper roleMapper;
     @Autowired
     private DeptConvert deptConvert;
+    @Autowired
+    private RedisCache redisCache;
 
     @Override
     public DeptVo selectByPrimaryKey(String id) {
-        return deptConvert.convert(deptMapper.selectById(id));
+        DeptVo deptVo = deptConvert.convert(deptMapper.selectById(id));
+        redisCache.setCacheObject(DeptKey.REDIS_SELECT_ID_KEY + id, deptVo);
+        if (deptVo == null) {
+            redisCache.expire(DeptKey.REDIS_SELECT_ID_KEY + id, 60 * 5);
+        }
+        return deptVo;
     }
 
     @Override
     public List<DeptVo> selectAll() {
-        return deptConvert.convert(deptMapper.selectList(null));
+        List<Dept> deptList = deptMapper.selectList(null);
+        List<DeptVo> deptVos = deptConvert.convert(deptList);
+        redisCache.setCacheList(DeptKey.REDIS_SELECT_ALL, deptVos);
+        if (deptList.size() == 0) {
+            redisCache.expire(DeptKey.REDIS_SELECT_ALL, 60 * 5);
+        }
+        return deptVos;
     }
 
     @Override
