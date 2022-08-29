@@ -9,6 +9,7 @@ import org.example.mapper.SongMapper;
 import org.example.util.Convert;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,14 +28,14 @@ public abstract class AlbumCovert implements Convert<Album, AlbumVo> {
     public abstract List<AlbumVo> convert(List<Album> albumList);
 
     @AfterMapping
-    public void convert(Album album, AlbumVo albumVo) {
+    public void convert(Album album,@MappingTarget AlbumVo albumVo) {
         albumVo.setSongList(songMapper.selectList(new LambdaQueryWrapper<Song>()
                 .eq(Song::getAlbumId, albumVo.getId())));
 
     }
 
     @AfterMapping
-    public void convert(List<Album> albumList, List<AlbumVo> albumVoList) {
+    public void convert(List<Album> albumList, @MappingTarget List<AlbumVo> albumVoList) {
         albumVoList.forEach(v -> convert(null, v));
     }
 }

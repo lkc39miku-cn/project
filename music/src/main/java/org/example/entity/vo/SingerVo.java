@@ -7,14 +7,13 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.example.entity.Album;
 import org.example.entity.Singer;
-import org.example.entity.Song;
+import org.example.entity.User;
 
-@ApiModel(value="歌曲Vo")
+@ApiModel(value="歌手Vo")
 @Data
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties(value = "handler")
-public class SongVo extends Song {
-    private Album album;
-    private Singer singer;
+public class SingerVo extends Singer {
+    private User user;
 }

@@ -3,6 +3,7 @@ package org.example.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import org.example.entity.Lists;
 import org.example.entity.Song;
 import org.example.entity.convert.ListsCovert;
@@ -15,6 +16,7 @@ import org.example.model.PageR;
 import org.example.service.ListsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,10 +32,9 @@ public class ListsController {
     @Autowired
     ListsCovert listsCovert;
 
-    @ApiModelProperty("歌单查询")
-    @GetMapping("selectAll")
-    public PageR<List<Lists>> selectAll(ListsParam listsParam) {
-
+    @ApiOperation(value = "歌单查询ByParam",notes = "歌单查询ByParam")
+    @GetMapping("selectByParam")
+    public PageR<List<Lists>> selectByParam(@RequestBody ListsParam listsParam) {
         IPage<Lists> songIPage = listsService.selectByParam(listsParam);;
         return new PageR<List<Lists>>().ok(songIPage.getRecords())
                 .setCount(songIPage.getTotal());
@@ -41,7 +42,7 @@ public class ListsController {
     }
     @ApiModelProperty("查询歌单内歌曲")
     @GetMapping("selectListsSong")
-    public PageR<List<Song>> selectListsSong(ListsParam listsParam) {
+    public PageR<List<Song>> selectListsSong(@RequestBody ListsParam listsParam) {
         IPage<Song> songIPage = listsService.selectSongList(listsParam);
        return new PageR<List<Song>>().ok(songIPage.getRecords())
                .setCount(songIPage.getTotal());

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.example.entity.Dept;
 import org.example.entity.Lists;
 import org.example.entity.Song;
 import org.example.entity.SongList;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
 * @author adm
@@ -40,12 +42,12 @@ public class ListsServiceImpl
 
     @Override
     public IPage<Lists> selectByParam(ListsParam listsParam) {
-        return null;
+        return listsMapper.selectPage(new Page<>(PageUtil.page(), PageUtil.pageSize()), null);
     }
 
     @Override
-    public List<Lists> selectAll() {
-        return null;
+    public List<ListsVo> selectAll() {
+        return listsCovert.convert(listsMapper.selectList(null));
     }
 
     @Override
@@ -56,7 +58,6 @@ public class ListsServiceImpl
                 .in(!ids.isEmpty(), Song::getId, ids));
     }
 }
-
 
 
 

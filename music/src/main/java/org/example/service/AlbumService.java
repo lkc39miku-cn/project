@@ -3,6 +3,7 @@ package org.example.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.example.entity.Album;
 import org.example.entity.param.AlbumParam;
+import org.example.entity.vo.AlbumVo;
 
 import java.util.List;
 
@@ -12,8 +13,7 @@ import java.util.List;
 * @createDate 2022-08-24 19:02:25
 */
 public interface AlbumService {
-
     IPage<Album> selectByParam(AlbumParam albumParam);
-    List<Album> selectAll();
+    List<AlbumVo> selectAll();
 
 }

@@ -11,6 +11,7 @@ import org.example.model.PageR;
 import org.example.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,9 +26,8 @@ public class AlbumController {
     @Autowired
     AlbumCovert albumCovert;
     @ApiModelProperty("歌曲信息查询")
-    @GetMapping("selectAll")
-    public PageR<List<AlbumVo>> selectAll(AlbumParam albumParam) {
-
+    @GetMapping("/selectAll")
+    public PageR<List<AlbumVo>> selectAll(@RequestBody AlbumParam albumParam) {
         IPage<Album> albumIPage = albumService.selectByParam(albumParam);
         return new PageR<List<AlbumVo>>().ok(albumCovert.convert(albumIPage.getRecords()))
                 .setCount(albumIPage.getTotal());

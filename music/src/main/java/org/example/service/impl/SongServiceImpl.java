@@ -1,8 +1,10 @@
 package org.example.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.example.entity.Album;
+import org.example.entity.Dept;
 import org.example.entity.Song;
 import org.example.entity.convert.SongConvert;
 import org.example.entity.param.SongParam;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
 * @author adm
@@ -35,6 +38,11 @@ private SongConvert songConvert;
     @Override
     public List<SongVo> selectAll() {
         return songConvert.convert(songMapper.selectList(null));
+}
+
+    @Override
+    public SongVo findSong(String id) {
+        return songConvert.convert(songMapper.selectById(id));
     }
 }
 

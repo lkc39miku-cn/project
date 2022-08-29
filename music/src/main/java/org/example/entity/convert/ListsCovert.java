@@ -16,6 +16,7 @@ import org.example.mapper.SongMapper;
 import org.example.util.Convert;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +37,7 @@ public abstract class ListsCovert implements Convert<Lists,ListsVo> {
     public abstract List<ListsVo> convert(List<Lists> listsList);
 
     @AfterMapping
-    public void convert(Lists lists, ListsVo listsVo) {
+    public void convert(Lists lists,@MappingTarget ListsVo listsVo) {
     List<SongList> listLists=songListMapper.selectList(new LambdaQueryWrapper<SongList>().eq(SongList::getListId,lists.getId()));
         listsVo.setSongList(songMapper.selectList(new LambdaQueryWrapper<Song>()
                 .in(listLists.size()>0,Song::getId,listLists)));
@@ -44,7 +45,7 @@ public abstract class ListsCovert implements Convert<Lists,ListsVo> {
     }
 
     @AfterMapping
-    public void convert(List<Lists> listsList, List<ListsVo> listsVoList) {
+    public void convert(List<Lists> listsList,@MappingTarget  List<ListsVo> listsVoList) {
         listsVoList.forEach(v -> convert(null, v));
     }
 }

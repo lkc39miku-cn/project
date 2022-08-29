@@ -5,16 +5,13 @@ import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.example.entity.Album;
-import org.example.entity.Singer;
-import org.example.entity.Song;
+import org.example.entity.User;
 
-@ApiModel(value="歌曲Vo")
+@ApiModel(value="UserVo")
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(value = "handler")
-public class SongVo extends Song {
-    private Album album;
-    private Singer singer;
+public class UserVo extends User {
+
 }

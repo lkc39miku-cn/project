@@ -16,6 +16,6 @@ import java.util.List;
 */
 public interface ListsService {
     IPage<Lists> selectByParam(ListsParam listsParam);
-    List<Lists> selectAll();
+    List<ListsVo> selectAll();
     IPage<Song> selectSongList(ListsParam listsParam);
 }

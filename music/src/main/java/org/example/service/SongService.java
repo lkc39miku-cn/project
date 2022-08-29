@@ -16,5 +16,6 @@ import java.util.List;
 public interface SongService {
     IPage<Song> selectByParam(SongParam songParam);
     List<SongVo> selectAll();
+    SongVo findSong(String id);
 
 }

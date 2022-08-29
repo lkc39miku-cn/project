@@ -6,15 +6,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.example.entity.Album;
-import org.example.entity.Singer;
-import org.example.entity.Song;
-
-@ApiModel(value="歌曲Vo")
+import org.example.entity.Slide;
+@ApiModel(value="轮播图Vo")
 @Data
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties(value = "handler")
-public class SongVo extends Song {
-    private Album album;
-    private Singer singer;
+public class SlideVo extends Slide {
+private Album album;
 }

@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "SongParam")
-public final class SongParam {
-
+@ApiModel(value = "用户Param")
+public class UserParam {
+    private  int id;
 }
