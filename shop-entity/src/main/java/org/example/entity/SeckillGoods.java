@@ -4,27 +4,30 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+import org.example.constants.BaseEntity;
 import org.hibernate.validator.constraints.Length;
 
 /**
 * 秒杀商品表
 * @TableName seckill_goods
-*/
-public class SeckillGoods implements Serializable {
-
-    /**
-    * 秒杀商品id
-    */
-    @NotBlank(message="[秒杀商品id]不能为空")
-    @Size(max= 32,message="编码长度不能超过32")
-    @ApiModelProperty("秒杀商品id")
-    @Length(max= 32,message="编码长度不能超过32")
-    private String id;
+*/@ApiModel(value="订单明细")
+@Data
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+public class SeckillGoods extends BaseEntity {
+    @Serial
+    private static final long serialVersionUID = -5532102041334625891L;
     /**
     * 商品id
     */
@@ -38,9 +41,9 @@ public class SeckillGoods implements Serializable {
     @ApiModelProperty("秒杀价")
     private BigDecimal seckillPrice;
     /**
-    * 库存数量
+    * 秒杀数量
     */
-    @ApiModelProperty("库存数量")
+    @ApiModelProperty("秒杀数量")
     private Date seckillCount;
     /**
     * 秒杀开始时间
@@ -57,7 +60,6 @@ public class SeckillGoods implements Serializable {
     */
     @ApiModelProperty("秒杀状态")
     private Integer seckillStatus;
-
 
 
 
