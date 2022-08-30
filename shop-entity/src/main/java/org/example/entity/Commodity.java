@@ -56,23 +56,6 @@ public class Commodity extends BaseEntity {
     @ApiModelProperty(value = "发售时间")
     protected LocalDateTime saleStartTime;
 
-    @ApiModelProperty(value = "商品秒杀价格")
-    protected BigDecimal promotionPrice;
-
-    @ApiModelProperty(value = "商品秒杀的类型")
-    protected Integer promotionType;
-
-    @ApiModelProperty(value = "商品秒杀的开始时间")
-    protected LocalDateTime promotionStartTime;
-
-    @ApiModelProperty(value = "商品秒杀的结束时间")
-    protected LocalDateTime promotionEndTime;
-
-    @ApiModelProperty(value = "商品秒杀的数量")
-    protected Integer promotionDeskillNumber;
-
-    @ApiModelProperty(value = "商品秒杀的状态 0 开启秒杀 1 没有开启秒杀")
-    protected Integer promotionDeskillStatus;
 
     @ApiModelProperty(value = "仓库id")
     protected String storeHouseId;
