@@ -35,7 +35,7 @@ public class StoreHouseOut extends BaseEntity {
     protected Integer deleteStatus;
 
     @ApiModelProperty(value = "审核人id")
-    protected String staffId;
+    protected String publishId;
 
     @ApiModelProperty(value = "提交人id ")
     protected String targetId;

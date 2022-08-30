@@ -19,17 +19,22 @@ public class CommodityServiceImpl implements CommodityService {
     private CommodityConvert commodityConvert;
 
     @Override
+    public IPage<Commodity> selectListByPage(CommodityParam commodityParam) {
+        return null;
+    }
+
+    @Override
     public int insert(Commodity commodity) {
-        return 0;
+        return commodityMapper.insert(commodity);
     }
 
     @Override
     public int update(Commodity commodity) {
-        return 0;
+        return commodityMapper.updateById(commodity);
     }
 
     @Override
     public int delete(String id) {
-        return 0;
+        return commodityMapper.deleteById(id);
     }
 }

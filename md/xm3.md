@@ -1,4 +1,6 @@
-# xm3
+---
+title: xm3
+---
 
 ## myspl
 

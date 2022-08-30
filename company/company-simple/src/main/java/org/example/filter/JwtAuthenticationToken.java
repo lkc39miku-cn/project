@@ -2,8 +2,10 @@ package org.example.filter;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.example.entity.Staff;
 import org.example.mapper.StaffMapper;
+import org.example.util.RedisCache;
 import org.example.util.StaffThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +28,8 @@ public class JwtAuthenticationToken extends OncePerRequestFilter {
 
     @Autowired
     private StaffMapper staffMapper;
+    @Autowired
+    private RedisCache redisCache;
 
     /**
      * @param request that resulted in an <code>AuthenticationException</code>
@@ -37,8 +41,15 @@ public class JwtAuthenticationToken extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if (Objects.nonNull(SecurityContextHolder.getContext().getAuthentication())) {
-            StaffThreadLocal.setStaff(staffMapper.selectOne(new LambdaQueryWrapper<Staff>()
-                    .eq(Staff::getUsername, SecurityContextHolder.getContext().getAuthentication().getName())));
+            Staff staff;
+            if (StringUtils.isEmpty(redisCache.getCacheObject("staff name:" + SecurityContextHolder.getContext().getAuthentication().getName()))) {
+                staff = staffMapper.selectOne(new LambdaQueryWrapper<Staff>()
+                        .eq(Staff::getUsername, SecurityContextHolder.getContext().getAuthentication().getName()));
+                redisCache.setCacheObject("staff name:" + staff.getUsername(), staff);
+            } else {
+                staff = redisCache.getCacheObject("staff name:" + SecurityContextHolder.getContext().getAuthentication().getName());
+            }
+            StaffThreadLocal.setStaff(staff);
         }
         filterChain.doFilter(request, response);
     }

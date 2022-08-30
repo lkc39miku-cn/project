@@ -18,8 +18,4 @@ public class CommodityServiceImpl implements CommodityService {
     @Autowired
     private CommodityConvert commodityConvert;
 
-    @Override
-    public IPage<Commodity> selectListByPage(CommodityParam commodityParam) {
-        return commodityMapper.selectPage(new Page<>(PageUtil.page(), PageUtil.pageSize()), null);
-    }
 }
