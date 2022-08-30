@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.Length;
 /**
 * 秒杀商品表
 * @TableName seckill_goods
-*/@ApiModel(value="订单明细")
+*/@ApiModel(value="秒杀商品")
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
