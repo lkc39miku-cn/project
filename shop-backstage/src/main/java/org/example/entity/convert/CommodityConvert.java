@@ -27,8 +27,8 @@ public abstract class CommodityConvert implements Convert<Commodity, CommodityVo
 
     @AfterMapping
     public void convert(Commodity commodity, @MappingTarget CommodityVo commodityVo) {
-        commodityVo.setCommodityBrand(commodityBrandMapper.selectById(commodity.getCommodityBrandId()))
-                .setCommodityType(commodityTypeMapper.selectById(commodity.getCommodityTypeId()));
+        commodityVo.setCommodityBrand(commodityBrandMapper.selectById(commodityVo.getCommodityBrandId()))
+                .setCommodityType(commodityTypeMapper.selectById(commodityVo.getCommodityTypeId()));
     }
 
     @AfterMapping

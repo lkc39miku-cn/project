@@ -16,6 +16,7 @@ import org.example.key.CommodityKey;
 import org.example.model.PageR;
 import org.example.model.R;
 import org.example.result.CompareExecute;
+import org.example.util.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,8 @@ public class CommodityBrandController {
     private CommodityBrandService commodityBrandService;
     @Autowired
     private CommodityBrandConvert commodityBrandConvert;
+    @Autowired
+    private RedisCache redisCache;
 
     @ApiOperation(value = "查询商品品牌")
     @GetMapping(value = "/select")

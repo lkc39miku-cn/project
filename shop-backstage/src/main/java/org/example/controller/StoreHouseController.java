@@ -12,6 +12,7 @@ import org.example.entity.param.StoreHouseParam;
 import org.example.entity.vo.CommodityVo;
 import org.example.entity.vo.StoreHouseVo;
 import org.example.key.CommodityKey;
+import org.example.key.StoreHouseKey;
 import org.example.model.PageR;
 import org.example.model.R;
 import org.example.result.CompareExecute;
@@ -60,7 +61,7 @@ public class StoreHouseController {
     public R<String> deleteStatusOn(String id) {
         return new CompareExecute<>().compare(storeHouseService.update(
                 (StoreHouse) new StoreHouse()
-                        .setDeleteStatus(CommodityKey.DELETE_STATUS_ON)
+                        .setDeleteStatus(StoreHouseKey.DELETE_STATUS_ON)
                         .setId(id)
         ), CompareExecute.ExecuteStatus.UPDATE);
     }
@@ -70,7 +71,7 @@ public class StoreHouseController {
     public R<String> deleteStatusOff(String id) {
         return new CompareExecute<>().compare(storeHouseService.update(
                 (StoreHouse) new StoreHouse()
-                        .setDeleteStatus(CommodityKey.DELETE_STATUS_OFF)
+                        .setDeleteStatus(StoreHouseKey.DELETE_STATUS_OFF)
                         .setId(id)
         ), CompareExecute.ExecuteStatus.UPDATE);
     }

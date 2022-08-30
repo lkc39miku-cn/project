@@ -7,6 +7,7 @@ import org.example.entity.Commodity;
 import org.example.entity.CommodityType;
 import org.example.entity.convert.CommodityTypeConvert;
 import org.example.entity.param.CommodityParam;
+import org.example.entity.vo.CommodityTypeVo;
 import org.example.entity.vo.CommodityVo;
 import org.example.key.CommodityKey;
 import org.example.key.CommodityTypeKey;
@@ -29,8 +30,8 @@ public class CommodityTypeController {
 
     @ApiOperation(value = "查询商品类型")
     @GetMapping(value = "/tree")
-    public R<List<CommodityVo>> tree() {
-        return new R<List<CommodityVo>>().ok(commodityTypeService.tree());
+    public R<List<CommodityTypeVo>> tree() {
+        return new R<List<CommodityTypeVo>>().ok(commodityTypeService.tree(commodityTypeService.selectList()));
     }
 
     @ApiOperation(value = "新增商品类型")

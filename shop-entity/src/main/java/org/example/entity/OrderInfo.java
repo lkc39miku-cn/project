@@ -17,7 +17,7 @@ public class OrderInfo extends BaseEntity {
 
     @Serial
     private static final long serialVersionUID = -5530202041334625891L;
-    @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "账单id")
     protected String orderId;
 
     @ApiModelProperty(value = "商品id")
