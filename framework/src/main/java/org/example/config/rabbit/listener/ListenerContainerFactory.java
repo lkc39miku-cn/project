@@ -12,7 +12,7 @@ public class ListenerContainerFactory {
     @Autowired
     private CachingConnectionFactory cachingConnectionFactory;
 
-    @Bean
+    @Bean("listenerContainer")
     public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory() {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(cachingConnectionFactory);

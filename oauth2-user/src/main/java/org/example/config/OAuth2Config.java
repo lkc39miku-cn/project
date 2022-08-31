@@ -59,7 +59,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter implement
                 .inMemory()
                 .withClient(clientId)
                 .secret(bCryptPasswordEncoder.encode(clientSecret))
-                .scopes("music", "shop", "order")
+                .scopes("music", "shop", "order", "user")
                 .autoApprove(true)
                 .accessTokenValiditySeconds(60 * 60 * 24)
                 .refreshTokenValiditySeconds(60 * 60 * 24)

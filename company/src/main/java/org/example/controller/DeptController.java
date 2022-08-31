@@ -1,9 +1,11 @@
 package org.example.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.example.config.GlobalFallback;
 import org.example.entity.Dept;
 import org.example.entity.vo.DeptVo;
 import org.example.key.DeptKey;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/dept")
@@ -31,9 +34,10 @@ public class DeptController {
 
     @GetMapping("/select/{id}")
     @ApiOperation(value = "通过主键查询单条数据", notes = "通过主键查询单条数据")
+    @SentinelResource(value = "/dept/select/{id}", fallbackClass = GlobalFallback.class, defaultFallback = "handleException")
     @PreAuthorize("@permissionCheck.hasPermissions('system:dept:query')")
     public R<DeptVo> selectOne(@PathVariable(value = "id") String id) {
-        DeptVo deptVo = StringUtils.isEmpty(redisCache.getCacheObject(DeptKey.REDIS_SELECT_ID_KEY + id)) ?
+        DeptVo deptVo = Objects.isNull(redisCache.getCacheObject(DeptKey.REDIS_SELECT_ID_KEY + id)) ?
                 deptService.selectByPrimaryKey(id) : (DeptVo) redisCache.getCacheObject(DeptKey.REDIS_SELECT_ID_KEY + id);
         return new R<DeptVo>()
                 .ok(deptVo);

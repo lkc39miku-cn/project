@@ -17,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/menu")
@@ -31,7 +32,7 @@ public class MenuController {
     @ApiOperation(value = "通过主键查询单条数据", notes = "通过主键查询单条数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:menu:query')")
     public R<MenuVo> selectOne(@PathVariable(value = "id") String id) {
-        MenuVo menuVo = StringUtils.isEmpty(redisCache.getCacheObject(MenuKey.REDIS_SELECT_ID_KEY + id)) ?
+        MenuVo menuVo = Objects.isNull(redisCache.getCacheObject(MenuKey.REDIS_SELECT_ID_KEY + id)) ?
                 menuService.selectByPrimaryKey(id) : (MenuVo) redisCache.getCacheObject(MenuKey.REDIS_SELECT_ID_KEY + id);
         return new R<MenuVo>().ok(menuVo);
     }

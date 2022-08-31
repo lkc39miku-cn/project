@@ -6,6 +6,7 @@ public interface RabbitConfigInterface {
         String topicExchange = "amq.topic";
         String fanoutExchange = "amq.fanout";
         String headersExchange = "amq.headers";
+        String deadExchange = "dlx.direct";
     }
 
     abstract class Rabbit {
