@@ -1,17 +1,12 @@
 package org.example.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.example.CommodityTypeService;
-import org.example.entity.Commodity;
+import org.example.service.CommodityTypeService;
 import org.example.entity.CommodityType;
 import org.example.entity.convert.CommodityTypeConvert;
-import org.example.entity.param.CommodityParam;
 import org.example.entity.vo.CommodityTypeVo;
-import org.example.entity.vo.CommodityVo;
-import org.example.key.CommodityKey;
 import org.example.key.CommodityTypeKey;
-import org.example.model.PageR;
 import org.example.model.R;
 import org.example.result.CompareExecute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@ApiOperation(value = "商品类型")
+@Api(tags = "商品类型")
 @RestController
 @RequestMapping(value = "/commodity/type")
 public class CommodityTypeController {

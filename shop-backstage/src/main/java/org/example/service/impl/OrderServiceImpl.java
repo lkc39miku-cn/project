@@ -6,7 +6,7 @@ import org.example.entity.Order;
 import org.example.entity.convert.OrderConvert;
 import org.example.entity.param.OrderParam;
 import org.example.mapper.OrderMapper;
-import org.example.OrderService;
+import org.example.service.OrderService;
 import org.example.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

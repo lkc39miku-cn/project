@@ -6,7 +6,7 @@ import org.example.entity.StoreHouseIn;
 import org.example.entity.convert.StoreHouseInConvert;
 import org.example.entity.param.StoreHouseInParam;
 import org.example.mapper.StoreHouseInMapper;
-import org.example.StoreHouseInService;
+import org.example.service.StoreHouseInService;
 import org.example.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

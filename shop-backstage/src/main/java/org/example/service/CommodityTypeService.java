@@ -1,4 +1,4 @@
-package org.example;
+package org.example.service;
 
 import org.example.entity.CommodityType;
 import org.example.entity.vo.CommodityTypeVo;

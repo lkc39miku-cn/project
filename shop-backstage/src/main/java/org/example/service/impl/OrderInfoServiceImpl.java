@@ -5,7 +5,7 @@ import org.example.entity.OrderInfo;
 import org.example.entity.convert.OrderInfoConvert;
 import org.example.entity.param.OrderInfoParam;
 import org.example.mapper.OrderInfoMapper;
-import org.example.OrderInfoService;
+import org.example.service.OrderInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
