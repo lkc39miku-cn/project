@@ -55,5 +55,5 @@ feign:
     load-balanced: true
 
 server:
-  address: 192.168.236.186
+  address: localhost
 #  address: 192.168.43.186

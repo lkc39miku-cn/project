@@ -19,7 +19,6 @@ public class OrderMQ implements RabbitConfigInterface {
         private static final String ORDER_TIMEOUT_DIRECT_QUEUE = "order_timeout";
         private static final String ORDER_TIMEOUT_DEAD_QUEUE = "order_timeout_dead";
         private static final String ORDER_TIMEOUT_DIRECT_DEAD_KEY = "order_key_dead";
-
     }
 
     @Bean("order_time_out_dead")

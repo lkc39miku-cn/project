@@ -21,13 +21,14 @@ import org.hibernate.validator.constraints.Length;
 /**
 * 秒杀商品表
 * @TableName seckill_goods
-*/@ApiModel(value="秒杀商品")
+*/
+@ApiModel(value="秒杀商品")
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 public class SeckillGoods extends BaseEntity {
     @Serial
-    private static final long serialVersionUID = -5532102041334625891L;
+    private static final long serialVersionUID = 5532102041334525891L;
     /**
     * 商品id
     */
