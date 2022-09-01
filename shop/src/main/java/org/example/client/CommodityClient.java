@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@Component
-@FeignClient(name = "shop-backstage", value = "/commodity", fallback = CommodityClientError.class)
+@FeignClient(name = "shop-backstage", path = "/commodity", fallback = CommodityClientError.class)
 public interface CommodityClient {
     @GetMapping(value = "/select")
     PageR<List<CommodityVo>> select(CommodityParam commodityParam);

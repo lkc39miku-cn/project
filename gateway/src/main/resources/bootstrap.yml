@@ -25,6 +25,7 @@ spring:
     sentinel:
       transport:
         dashboard: 47.103.56.186:8858
+        client-ip: ${server.address}
       enabled: true
       eager: true
 
@@ -38,10 +39,19 @@ spring:
           uri: lb://oauth2
           predicates:
             - Path=/oauth2/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allow-credentials: true
+#            allowed-origins: '*'
+            allowed-origin-patterns: '*'
+            allowed-methods: '*'
+            allowed-headers: '*'
+            max-age: 3600
 
 feign:
   sentinel:
     enabled: true
 
 server:
-  address: 192.168.43.186
+  address: localhost

@@ -1,56 +1,58 @@
-#spring:
-#  application:
-#    name: shop
-#
-#  profiles:
-#    active: dev
-#
-#  cloud:
-#    inetutils:
+spring:
+  application:
+    name: shop
+
+  profiles:
+    active: dev
+
+  cloud:
+    inetutils:
+      preferred-networks: 192.168.236
 #      preferred-networks: 192.168.43
-#
-#    nacos:
-#      config:
-#        file-extension: yaml
-#        server-addr: 47.103.56.186:8848
-#        namespace: 13c41066-5dd8-4570-bb0a-23b7ed95a10a
-#        group: dev
-#
-#      discovery:
-#        server-addr: 47.103.56.186:8848
-#        namespace: 13c41066-5dd8-4570-bb0a-23b7ed95a10a
-#        group: dev
-#        ephemeral: true
-#
-#    sentinel:
-#      transport:
-#        dashboard: 47.103.56.186:8858
-#      enabled: true
-#      eager: true
-#
-#  redis:
-#    host: 47.103.56.186
-#    port: 6379
-#    password: 123456
-#
-#  rabbitmq:
-#    addresses: 47.103.56.186
-#    port: 5672
-#    username: root
-#    password: 123456
-#
-#security:
-#  signing-key: web
-#
-#  oauth2:
-#    client:
-#      client-id: web
-#      client-secret: 123456
-#
-#feign:
-#  oauth2:
-#    enabled: true
-#    load-balanced: true
-#
-#server:
-#  address: 192.168.43.186
+
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: 47.103.56.186:8848
+        namespace: 13c41066-5dd8-4570-bb0a-23b7ed95a10a
+        group: dev
+
+      discovery:
+        server-addr: 47.103.56.186:8848
+        namespace: 13c41066-5dd8-4570-bb0a-23b7ed95a10a
+        group: dev
+        ephemeral: true
+
+    sentinel:
+      transport:
+        dashboard: 47.103.56.186:8858
+      enabled: true
+      eager: true
+
+  redis:
+    host: 47.103.56.186
+    port: 6379
+    password: 123456
+
+  rabbitmq:
+    addresses: 47.103.56.186
+    port: 5672
+    username: root
+    password: 123456
+
+security:
+  signing-key: web
+
+  oauth2:
+    client:
+      client-id: web
+      client-secret: 123456
+
+feign:
+  oauth2:
+    enabled: true
+    load-balanced: true
+
+server:
+#  address: 192.168.236.186
+  address: 192.168.43.186

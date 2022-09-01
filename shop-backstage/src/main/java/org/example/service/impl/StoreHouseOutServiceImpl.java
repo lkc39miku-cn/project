@@ -6,7 +6,7 @@ import org.example.entity.StoreHouseOut;
 import org.example.entity.convert.StoreHouseOutConvert;
 import org.example.entity.param.StoreHouseOutParam;
 import org.example.mapper.StoreHouseOutMapper;
-import org.example.StoreHouseOutService;
+import org.example.service.StoreHouseOutService;
 import org.example.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

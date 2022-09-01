@@ -40,11 +40,23 @@ public class JwtAuthenticationToken extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+//        log.info("JwtAuthenticationToken: {}", SecurityContextHolder.getContext().getAuthentication());
+//        log.info("JwtAuthenticationToken Name: {}", SecurityContextHolder.getContext().getAuthentication().getName());
+
         if (Objects.nonNull(SecurityContextHolder.getContext().getAuthentication())) {
+            if (StringUtils.isEmpty(SecurityContextHolder.getContext().getAuthentication().getName())) {
+                filterChain.doFilter(request, response);
+                return;
+            }
             Staff staff;
-            if (StringUtils.isEmpty(redisCache.getCacheObject("staff name:" + SecurityContextHolder.getContext().getAuthentication().getName()))) {
+            if (Objects.isNull(redisCache.getCacheObject("staff name:" + SecurityContextHolder.getContext().getAuthentication().getName()))) {
                 staff = staffMapper.selectOne(new LambdaQueryWrapper<Staff>()
                         .eq(Staff::getUsername, SecurityContextHolder.getContext().getAuthentication().getName()));
+
+                if (Objects.isNull(staff)) {
+                    filterChain.doFilter(request, response);
+                    return;
+                }
                 redisCache.setCacheObject("staff name:" + staff.getUsername(), staff);
             } else {
                 staff = redisCache.getCacheObject("staff name:" + SecurityContextHolder.getContext().getAuthentication().getName());

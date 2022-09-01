@@ -5,25 +5,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.entity.User;
 import org.example.entity.UserBody;
 import org.example.exception.service.ServiceException;
-import org.example.key.StaffKey;
 import org.example.key.UserKey;
 import org.example.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Slf4j
 @Service
-public class StaffDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
