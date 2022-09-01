@@ -7,7 +7,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 @SpringBootApplication
 @EnableResourceServer
-@EnableScheduling
 public class ShopApp {
     public static void main(String[] args) {
         SpringApplication.run(ShopApp.class, args);

@@ -53,7 +53,7 @@ public class PostController {
     @PostMapping("/insert")
     @ApiOperation(value = "添加数据", notes = "添加数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:post:add')")
-    public R<String> insert(Post post) {
+    public R<String> insert(@RequestBody Post post) {
         if (postService.checkPostName(post.getName())) {
             return new R<String>().fail("岗位名称已存在");
         }
@@ -77,7 +77,7 @@ public class PostController {
     @PutMapping("/update")
     @ApiOperation(value = "更新数据", notes = "更新数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:post:update')")
-    public R<String> update(Post post) {
+    public R<String> update(@RequestBody Post post) {
         if (postService.checkPostName(post.getName(), post.getId())) {
             return new R<String>().fail("岗位名称已存在");
         }

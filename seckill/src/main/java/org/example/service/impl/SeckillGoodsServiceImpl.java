@@ -33,8 +33,7 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService{
 
     @Override
     public List<SeckillGoodsVo> selAll() {
-        List<SeckillGoodsVo>  seckillGoodsList=  redisCache.getCacheList("seckill_goods_all");
-        return seckillGoodsList;
+        return redisCache.getCacheList("seckill_goods_all");
     }
 
     @Override
@@ -52,7 +51,7 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService{
                 return seckillGoodsVo;
             }
         }
-        return seckillGoodsVo;
+        return null;
     }
 
 }

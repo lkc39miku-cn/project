@@ -4,6 +4,7 @@ import javax.validation.constraints.Size;
 
 import java.io.Serial;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import io.swagger.annotations.ApiModel;
@@ -32,14 +33,14 @@ public class SeckillOrderInfo extends BaseEntity {
     */
 
     @Size(max= 255,message="编码长度不能超过255")
-    @ApiModelProperty("商品的id")
+    @ApiModelProperty("商品id")
     @Length(max= 255,message="编码长度不能超过255")
     private String seckillCommodityId;
     /**
     * 支付金额
     */
     @ApiModelProperty("支付金额")
-    private Long maney;
+    private BigDecimal money;
     /**
     * 用户id
     */
@@ -51,7 +52,7 @@ public class SeckillOrderInfo extends BaseEntity {
     * 支付时间
     */
     @ApiModelProperty("支付时间")
-    private LocalDateTime zfsj;
+    private LocalDateTime payTime;
     /**
     * 收货人地址id
     */
@@ -80,16 +81,4 @@ public class SeckillOrderInfo extends BaseEntity {
     @ApiModelProperty("交易流水号")
     @Length(max= 255,message="编码长度不能超过255")
     private String orderNumber;
-    /**
-    * 创建时间
-    */
-    @ApiModelProperty("创建时间")
-    private LocalDateTime createdTime;
-    /**
-    * 更新时间
-    */
-    @ApiModelProperty("更新时间")
-    private LocalDateTime updatedTime;
-
-
 }

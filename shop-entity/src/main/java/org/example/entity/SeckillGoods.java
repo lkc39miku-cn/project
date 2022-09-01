@@ -1,14 +1,11 @@
 package org.example.entity;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
 
 import java.io.Serial;
-import java.io.Serializable;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -45,17 +42,17 @@ public class SeckillGoods extends BaseEntity {
     * 秒杀数量
     */
     @ApiModelProperty("秒杀数量")
-    private Date seckillCount;
+    private Integer seckillCount;
     /**
     * 秒杀开始时间
     */
     @ApiModelProperty("秒杀开始时间")
-    private Date startDate;
+    private LocalDateTime startDate;
     /**
     * 秒杀结束时间
     */
     @ApiModelProperty("秒杀结束时间")
-    private Date endDate;
+    private LocalDateTime endDate;
     /**
     * 秒杀状态
     */

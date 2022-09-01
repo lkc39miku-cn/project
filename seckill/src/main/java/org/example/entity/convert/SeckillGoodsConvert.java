@@ -1,11 +1,8 @@
 package org.example.entity.convert;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.example.entity.Commodity;
-import org.example.entity.OrderInfo;
 import org.example.entity.SeckillGoods;
-import org.example.entity.vo.OrderInfoVo;
 import org.example.entity.vo.SeckillGoodsVo;
 import org.example.mapper.CommodityMapper;
 import org.example.util.Convert;
@@ -20,7 +17,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 @Component
 public abstract class SeckillGoodsConvert implements Convert<SeckillGoods, SeckillGoodsVo> {
-@Autowired
+    @Autowired
     CommodityMapper commodityMapper;
     @Override
     public abstract SeckillGoodsVo convert(SeckillGoods seckillGoods);

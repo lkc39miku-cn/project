@@ -48,7 +48,7 @@ public class StaffController {
     @PostMapping("/insert")
     @ApiOperation(value = "添加数据", notes = "添加数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:add')")
-    public R<String> insert(Staff staff) {
+    public R<String> insert(@RequestBody Staff staff) {
         if (staffService.checkStaffUsername(staff.getUsername())) {
             return new R<String>().fail("用户名已存在");
         }
@@ -65,7 +65,7 @@ public class StaffController {
     @PutMapping("/update")
     @ApiOperation(value = "修改数据", notes = "修改数据")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:edit')")
-    public R<String> update(Staff staff) {
+    public R<String> update(@RequestBody Staff staff) {
         staffService.checkStaffAllowed(staff);
         if (staffService.checkStaffUsername(staff.getUsername(), staff.getId())) {
             return new R<String>().fail("用户名已存在");
@@ -90,7 +90,7 @@ public class StaffController {
     @PutMapping("/update/password")
     @ApiOperation(value = "修改密码", notes = "修改密码")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:edit')")
-    public R<String> updatePassword(Staff staff) {
+    public R<String> updatePassword(@RequestBody Staff staff) {
         staffService.checkStaffAllowed(staff);
         staff.setPassword(SecurityUtils.encryptPassword(staff.getPassword()));
         return new CompareExecute<>().compare(staffService.update((Staff) new Staff()
@@ -101,7 +101,7 @@ public class StaffController {
     @PutMapping("/update/status")
     @ApiOperation(value = "状态修改", notes = "状态修改")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:edit')")
-    public R<String> updateStatus(Staff staff) {
+    public R<String> updateStatus(@RequestBody Staff staff) {
         staffService.checkStaffAllowed(staff);
         return new CompareExecute<>().compare(staffService.update((Staff) new Staff()
                 .setStatus(staff.getStatus())
