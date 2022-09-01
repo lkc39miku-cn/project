@@ -17,4 +17,5 @@ import java.io.Serial;
 public class CommodityBrandVo extends CommodityBrand {
     @Serial
     private static final long serialVersionUID = 7117537238513553653L;
+
 }

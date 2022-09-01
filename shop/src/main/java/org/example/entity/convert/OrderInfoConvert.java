@@ -1,14 +1,15 @@
 package org.example.entity.convert;
 
 
-import org.example.entity.Order;
 import org.example.entity.OrderInfo;
 import org.example.entity.vo.OrderInfoVo;
-import org.example.entity.vo.OrderVo;
+import org.example.mapper.CommodityMapper;
+import org.example.mapper.UserMapper;
 import org.example.util.Convert;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,6 +17,12 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 @Component
 public abstract class OrderInfoConvert implements Convert<OrderInfo, OrderInfoVo> {
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private CommodityMapper commodityMapper;
+    @Autowired
+    private CommodityConvert commodityConvert;
     @Override
     public abstract OrderInfoVo convert(OrderInfo orderInfo);
 
@@ -24,7 +31,8 @@ public abstract class OrderInfoConvert implements Convert<OrderInfo, OrderInfoVo
 
     @AfterMapping
     public void convert(OrderInfo orderInfo, @MappingTarget OrderInfoVo orderInfoVo) {
-
+        orderInfoVo
+                .setCommodityVo(commodityConvert.convert(commodityMapper.selectById(orderInfoVo.getCommodityId())));
     }
 
     @AfterMapping
