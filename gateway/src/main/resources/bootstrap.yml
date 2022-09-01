@@ -39,6 +39,14 @@ spring:
           uri: lb://oauth2
           predicates:
             - Path=/oauth2/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allow-credentials: true
+            allowed-origins: '*'
+            allowed-methods: '*'
+            allowed-headers: '*'
+            max-age: 3600
 
 feign:
   sentinel:

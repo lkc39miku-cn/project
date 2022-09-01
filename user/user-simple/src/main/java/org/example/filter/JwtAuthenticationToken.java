@@ -42,10 +42,18 @@ public class JwtAuthenticationToken extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if (Objects.nonNull(SecurityContextHolder.getContext().getAuthentication())) {
+            if (StringUtils.isEmpty(SecurityContextHolder.getContext().getAuthentication().getName())) {
+                filterChain.doFilter(request, response);
+                return;
+            }
             User user;
             if (StringUtils.isEmpty(redisCache.getCacheObject("user name:" + SecurityContextHolder.getContext().getAuthentication().getName()))) {
                  user = userMapper.selectOne(new LambdaQueryWrapper<User>()
                         .eq(User::getAccount, SecurityContextHolder.getContext().getAuthentication().getName()));
+                if (Objects.isNull(user)) {
+                    filterChain.doFilter(request, response);
+                    return;
+                }
                 redisCache.setCacheObject("user name:" + user.getAccount(), user);
             } else {
                 user = redisCache.getCacheObject("user name:" + SecurityContextHolder.getContext().getAuthentication().getName());

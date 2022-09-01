@@ -1,4 +1,4 @@
-package org.example;
+package org.example.service;
 
 import org.example.entity.OrderInfo;
 import org.example.entity.param.OrderInfoParam;

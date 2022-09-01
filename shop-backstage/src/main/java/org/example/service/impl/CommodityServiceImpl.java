@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.example.entity.StoreHouse;
 import org.example.key.StoreHouseKey;
 import org.example.mapper.CommodityMapper;
-import org.example.CommodityService;
+import org.example.service.CommodityService;
 import org.example.entity.Commodity;
 import org.example.entity.convert.CommodityConvert;
 import org.example.entity.param.CommodityParam;

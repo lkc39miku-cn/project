@@ -3,10 +3,8 @@ package org.example.service.impl;
 import org.example.entity.CommodityType;
 import org.example.entity.convert.CommodityTypeConvert;
 import org.example.entity.vo.CommodityTypeVo;
-import org.example.entity.vo.CommodityVo;
-import org.example.entity.vo.DeptVo;
 import org.example.mapper.CommodityTypeMapper;
-import org.example.CommodityTypeService;
+import org.example.service.CommodityTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

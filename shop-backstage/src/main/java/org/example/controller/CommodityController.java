@@ -3,7 +3,7 @@ package org.example.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.example.CommodityService;
+import org.example.service.CommodityService;
 import org.example.entity.Commodity;
 import org.example.entity.convert.CommodityConvert;
 import org.example.entity.param.CommodityParam;

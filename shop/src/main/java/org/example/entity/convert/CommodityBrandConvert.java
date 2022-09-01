@@ -1,9 +1,7 @@
 package org.example.entity.convert;
 
 import org.example.entity.CommodityBrand;
-import org.example.entity.CommodityType;
 import org.example.entity.vo.CommodityBrandVo;
-import org.example.entity.vo.CommodityTypeVo;
 import org.example.util.Convert;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
