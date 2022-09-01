@@ -1,6 +1,5 @@
 package org.example.entity.convert;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.example.entity.Commodity;
 import org.example.entity.vo.CommodityVo;
 import org.example.mapper.CommodityBrandMapper;
@@ -28,8 +27,8 @@ public abstract class CommodityConvert implements Convert<Commodity, CommodityVo
 
     @AfterMapping
     public void convert(Commodity commodity, @MappingTarget CommodityVo commodityVo) {
-        commodityVo.setCommodityBrand(commodityBrandMapper.selectById(commodity.getCommodityBrandId()))
-                .setCommodityType(commodityTypeMapper.selectById(commodity.getCommodityTypeId()));
+        commodityVo.setCommodityBrand(commodityBrandMapper.selectById(commodityVo.getCommodityBrandId()))
+                .setCommodityType(commodityTypeMapper.selectById(commodityVo.getCommodityTypeId()));
     }
 
     @AfterMapping

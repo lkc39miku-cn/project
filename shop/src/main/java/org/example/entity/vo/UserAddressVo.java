@@ -6,19 +6,20 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.example.entity.StoreHouse;
+import org.example.entity.User;
+import org.example.entity.UserAddress;
 
 import java.io.Serial;
 
-@ApiModel(value="库存Vo")
+@ApiModel(value="用户地址Vo")
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(value = "handler")
-public class StoreHouseVo extends StoreHouse {
+public class UserAddressVo extends UserAddress {
     @Serial
-    private static final long serialVersionUID = -231234917914087571L;
+    private static final long serialVersionUID = 2915405164195701005L;
 
-    @ApiModelProperty(value="商品")
-    private CommodityVo commodityVo;
+    @ApiModelProperty(value = "用户")
+    private User user;
 }

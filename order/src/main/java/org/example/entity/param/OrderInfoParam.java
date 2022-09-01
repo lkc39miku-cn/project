@@ -7,8 +7,9 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-@ApiModel(value="商品品牌参数")
-public class CommodityBrandParam {
-    @ApiModelProperty(value = "展示状态 1:展示 0:不展示")
-    private Integer publishStatus;
+@ApiModel(value="订单详情参数")
+public class OrderInfoParam {
+
+    @ApiModelProperty(value = "订单id")
+    private String orderId;
 }

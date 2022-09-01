@@ -1,4 +1,4 @@
-package org.example.config.mq.config;
+package org.example.config.mq;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.config.rabbit.RabbitConfigInterface;
@@ -16,9 +16,10 @@ public class OrderMQ implements RabbitConfigInterface {
             log.info("rabbitName: order timeout");
         }
 
-        private static final String ORDER_TIMEOUT_DIRECT_QUEUE = "order_timeout";
-        private static final String ORDER_TIMEOUT_DEAD_QUEUE = "order_timeout_dead";
-        private static final String ORDER_TIMEOUT_DIRECT_DEAD_KEY = "order_key_dead";
+        public static final String ORDER_TIMEOUT_DIRECT_QUEUE = "order_timeout";
+        public static final String ORDER_TIMEOUT_DEAD_QUEUE = "order_timeout_dead";
+        public static final String ORDER_TIMEOUT_DIRECT_KEY = "msg.send";
+        public static final String ORDER_TIMEOUT_DIRECT_DEAD_KEY = "order_key_dead";
 
     }
 
@@ -48,11 +49,12 @@ public class OrderMQ implements RabbitConfigInterface {
         return QueueBuilder.nonDurable(OrderTimeout.ORDER_TIMEOUT_DIRECT_QUEUE)
                 .deadLetterExchange(Exchange.deadExchange)
                 .deadLetterRoutingKey(OrderTimeout.ORDER_TIMEOUT_DIRECT_DEAD_KEY)
+                .maxLength(5)
                 .build();
     }
 
     @Bean("binding")
     public Binding binding(@Qualifier("order_timeout") Queue queue, @Qualifier("directExchange") org.springframework.amqp.core.Exchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("msg.send").noargs();
+        return BindingBuilder.bind(queue).to(exchange).with(OrderTimeout.ORDER_TIMEOUT_DIRECT_KEY).noargs();
     }
 }

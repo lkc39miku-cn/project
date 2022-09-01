@@ -40,8 +40,8 @@ public class JwtAuthenticationToken extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        log.info("JwtAuthenticationToken: {}", SecurityContextHolder.getContext().getAuthentication());
-        log.info("JwtAuthenticationToken Name: {}", SecurityContextHolder.getContext().getAuthentication().getName());
+//        log.info("JwtAuthenticationToken: {}", SecurityContextHolder.getContext().getAuthentication());
+//        log.info("JwtAuthenticationToken Name: {}", SecurityContextHolder.getContext().getAuthentication().getName());
 
         if (Objects.nonNull(SecurityContextHolder.getContext().getAuthentication())) {
             if (StringUtils.isEmpty(SecurityContextHolder.getContext().getAuthentication().getName())) {
