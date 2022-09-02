@@ -51,6 +51,14 @@ spring:
           uri: lb://oauth2-user
           predicates:
             - Path=/oauth2-user/**
+        - id: order
+          uri: lb://order
+          predicates:
+            - Path=/order/**
+        - id: seckill
+          uri: lb://seckill
+          predicates:
+            - Path=/seckill/**
       globalcors:
         cors-configurations:
           '[/**]':
