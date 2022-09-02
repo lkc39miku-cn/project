@@ -17,10 +17,10 @@ public class OrderMQProvider {
     private RabbitTemplate rabbitTemplate;
 
     @Async
-    public void send(String message, String orderId) {
+    public void send(String message, String userId) {
         rabbitTemplate.convertAndSend(RabbitConfigInterface.Exchange.directExchange, OrderMQ.OrderTimeout.ORDER_TIMEOUT_DIRECT_KEY, message, message1 -> {
-            message1.getMessageProperties().setExpiration("30000");
-            message1.getMessageProperties().setMessageId(orderId);
+            message1.getMessageProperties().setExpiration("60000");
+            message1.getMessageProperties().setMessageId(userId);
             return message1;
         });
     }

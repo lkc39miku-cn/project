@@ -25,7 +25,4 @@ public class OrderInfoVo extends OrderInfo {
 
     @ApiModelProperty(value = "商品")
     private CommodityVo commodityVo;
-
-    @ApiModelProperty(value = "用户地址")
-    private UserAddressVo userAddressVo;
 }

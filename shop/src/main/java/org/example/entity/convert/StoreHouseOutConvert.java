@@ -2,7 +2,6 @@ package org.example.entity.convert;
 
 import org.example.entity.StoreHouseOut;
 import org.example.entity.vo.StoreHouseOutVo;
-import org.example.mapper.StaffMapper;
 import org.example.mapper.StoreHouseMapper;
 import org.example.util.Convert;
 import org.mapstruct.AfterMapping;
@@ -20,8 +19,6 @@ public abstract class StoreHouseOutConvert implements Convert<StoreHouseOut, Sto
     private StoreHouseMapper storeHouseMapper;
     @Autowired
     private StoreHouseConvert storeHouseConvert;
-    @Autowired
-    private StaffMapper staffMapper;
 
     @Override
     public abstract StoreHouseOutVo convert(StoreHouseOut storeHouseOut);
@@ -32,9 +29,7 @@ public abstract class StoreHouseOutConvert implements Convert<StoreHouseOut, Sto
     @AfterMapping
     public void convert(StoreHouseOut storeHouseOut, @MappingTarget StoreHouseOutVo storeHouseOutVo) {
         storeHouseOutVo
-                .setStoreHouseVo(storeHouseConvert.convert(storeHouseMapper.selectById(storeHouseOutVo.getStoreHouseId())))
-                .setPublishStaff(staffMapper.selectById(storeHouseOutVo.getPublishId()))
-                .setTargetStaff(staffMapper.selectById(storeHouseOutVo.getTargetId()));
+                .setStoreHouseVo(storeHouseConvert.convert(storeHouseMapper.selectById(storeHouseOutVo.getStoreHouseId())));
     }
     @AfterMapping
     public void convert(List<StoreHouseOut> storeHouseOutList, @MappingTarget List<StoreHouseOutVo> storeHouseOutVoList) {

@@ -5,7 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.example.config.rabbit.RabbitConfigInterface;
+import org.example.entity.Commodity;
 import org.example.entity.Order;
+import org.example.entity.OrderInfo;
+import org.example.mapper.CommodityMapper;
+import org.example.mapper.OrderInfoMapper;
 import org.example.mapper.OrderMapper;
 import org.example.service.OrderService;
 import org.springframework.amqp.core.Message;
@@ -17,6 +21,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -32,6 +37,10 @@ public class OrderListener {
     private OrderService orderService;
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private CommodityMapper commodityMapper;
+    @Autowired
+    private OrderInfoMapper orderInfoMapper;
 
     @RabbitHandler
     public void onMessage(@Payload String message, Channel channel, @Headers Map<String, Object> headers) throws Exception {
@@ -50,9 +59,23 @@ public class OrderListener {
                 return;
             }
 
-            if (order.getOrderType() == 1) {
-                orderMapper.deleteById(order.setOrderType(2));
-                log.info("store + 1");
+            // 0 未支付 1 已支付 2 超时
+            if (order.getOrderType() == 0) {
+                orderMapper.updateById(order.setOrderType(2));
+
+                List<OrderInfo> orderInfoList = orderInfoMapper.selectList(new LambdaQueryWrapper<OrderInfo>()
+                        .eq(OrderInfo::getOrderId, order.getId()));
+
+                orderInfoList.forEach(orderInfo -> {
+                    orderInfoMapper.updateById(orderInfo.setOrderType(2));
+                });
+
+                List<String> list = orderInfoList.stream().map(OrderInfo::getCommodityId).toList();
+
+                list.forEach(v -> {
+                    Commodity commodity = commodityMapper.selectById(v);
+                    commodityMapper.updateById(commodity.setCommodityNumber(commodity.getCommodityNumber() + 1));
+                });
             }
 
             Long deliveryTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);

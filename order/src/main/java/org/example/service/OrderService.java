@@ -1,13 +1,12 @@
 package org.example.service;
 
 import org.example.entity.Order;
+import org.example.entity.param.OrderParam;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 public interface OrderService {
-    List<Order> select();
+    int insert(OrderParam orderParam);
 
-    int insert(Order order);
-
-    int update(Order order);
+    void pay(HttpServletRequest request);
 }

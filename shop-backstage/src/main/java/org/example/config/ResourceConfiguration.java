@@ -23,6 +23,6 @@ public class ResourceConfiguration extends ResourceServerConfigurerAdapter imple
                 .and()
                 .authorizeRequests()
                 .anyRequest()
-                .access("#oauth2.hasScope('shop')");
+                .access("#oauth2.hasScope('shop-backstage')");
     }
 }

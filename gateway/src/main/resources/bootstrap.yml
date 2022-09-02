@@ -39,6 +39,18 @@ spring:
           uri: lb://oauth2
           predicates:
             - Path=/oauth2/**
+        - id: user
+          uri: lb://user
+          predicates:
+            - Path=/user/**
+        - id: shop-backstage
+          uri: lb://shop-backstage
+          predicates:
+            - Path=/shop-backstage/**
+        - id: oauth2-user
+          uri: lb://oauth2-user
+          predicates:
+            - Path=/oauth2-user/**
       globalcors:
         cors-configurations:
           '[/**]':

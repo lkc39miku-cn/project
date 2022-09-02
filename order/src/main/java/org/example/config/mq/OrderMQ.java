@@ -49,7 +49,6 @@ public class OrderMQ implements RabbitConfigInterface {
         return QueueBuilder.nonDurable(OrderTimeout.ORDER_TIMEOUT_DIRECT_QUEUE)
                 .deadLetterExchange(Exchange.deadExchange)
                 .deadLetterRoutingKey(OrderTimeout.ORDER_TIMEOUT_DIRECT_DEAD_KEY)
-                .maxLength(5)
                 .build();
     }
 

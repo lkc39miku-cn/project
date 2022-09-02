@@ -1,6 +1,9 @@
 package org.example.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import org.apache.commons.lang3.StringUtils;
 import org.example.entity.OrderInfo;
+import org.example.entity.param.OrderInfoParam;
 import org.example.mapper.OrderInfoMapper;
 import org.example.service.OrderInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     private OrderInfoMapper orderInfoMapper;
 
     @Override
-    public List<OrderInfo> select() {
-        return orderInfoMapper.selectList(null);
+    public List<OrderInfo> select(OrderInfoParam orderInfoParam) {
+        return orderInfoMapper.selectList(new LambdaQueryWrapper<OrderInfo>()
+                .eq(StringUtils.isNotEmpty(orderInfoParam.getOrderId()), OrderInfo::getOrderId, orderInfoParam.getOrderId()));
     }
 
     @Override
@@ -30,6 +34,8 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 
     @Override
     public int delete(String id) {
-        return orderInfoMapper.deleteById(id);
+        return orderInfoMapper.updateById((OrderInfo) new OrderInfo()
+                .setDeleteStatus(1)
+                .setId(id));
     }
 }
