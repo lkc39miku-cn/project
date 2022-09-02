@@ -1,5 +1,4 @@
 package org.example.config.task;
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.example.entity.SeckillGoods;
 import org.example.entity.convert.SeckillGoodsConvert;
@@ -10,9 +9,10 @@ import org.example.util.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class SeckillGoodsPushTask {
@@ -34,9 +34,9 @@ public class SeckillGoodsPushTask {
                 .lt(SeckillGoods::getEndDate, new Date());
         SeckillGoods seckillGoods = new SeckillGoods();
         seckillGoods.setSeckillStatus(1);
-      if (!seckillGoodsMapper.selectList(null).isEmpty()){
-          seckillGoodsMapper.update(seckillGoods, queryWrapper);
-      }
+        if (!seckillGoodsMapper.selectList(null).isEmpty()){
+            seckillGoodsMapper.update(seckillGoods, queryWrapper);
+        }
     }
 
     @Scheduled(cron = "0/1 * * * * ?")
@@ -49,7 +49,11 @@ public class SeckillGoodsPushTask {
                 .lt(SeckillGoods::getEndDate, new Date());
         List<SeckillGoods> seckillGoodsList = seckillGoodsMapper.selectList(queryWrapper);
         if (!seckillGoodsList.isEmpty()){
-            redisCache.setCacheList("seckill_goods_y",seckillGoodsConvert.convert(seckillGoodsList) );
+            for (SeckillGoods seckillGoods:seckillGoodsList){
+                Map<String,Object> map=new HashMap<>();
+                map.put(seckillGoods.getGoodsId(),seckillGoodsConvert.convert(seckillGoods));
+                redisCache.setCacheMap("seckill_goods_y", map );
+            }
         }
 
 
@@ -59,7 +63,11 @@ public class SeckillGoodsPushTask {
     public void loadSeckillGoodsAllTORedis() {
         List<SeckillGoods> seckillGoodsList = seckillGoodsMapper.selectList(null);
         if (!seckillGoodsList.isEmpty()){
-            redisCache.setCacheList("seckill_goods_all",seckillGoodsConvert.convert(seckillGoodsList) );
+            for (SeckillGoods seckillGoods:seckillGoodsList){
+                Map<String,Object> map=new HashMap<>();
+                map.put(seckillGoods.getGoodsId(),seckillGoodsConvert.convert(seckillGoods));
+                redisCache.setCacheMap("seckill_goods_all", map );
+            }
         }
 
     }

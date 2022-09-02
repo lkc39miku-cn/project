@@ -1,4 +1,4 @@
-package org.config;
+package org.example.config;
 
 public class AlipayConfig {
 

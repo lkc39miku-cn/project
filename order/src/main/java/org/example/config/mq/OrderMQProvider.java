@@ -1,4 +1,4 @@
-package org.config.mq;
+package org.example.config.mq;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.config.rabbit.RabbitConfigInterface;

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.example.entity.SeckillGoods;
 import org.example.entity.param.SeckillGoodsParam;
 import org.example.entity.vo.SeckillGoodsVo;
+import org.example.model.R;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface SeckillGoodsService  {
 List<SeckillGoodsVo> selAll();
 IPage<SeckillGoods> selectListByPage();
 SeckillGoodsVo findSeckillGoods(SeckillGoodsParam seckillGoodsParam);
+ R<String> saveSeckillOrder(SeckillGoodsParam seckillGoodsParam);
+
  }

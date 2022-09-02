@@ -3,11 +3,13 @@ package org.example.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.example.entity.convert.SeckillGoodsConvert;
+import org.example.entity.param.SeckillGoodsParam;
 import org.example.entity.vo.SeckillGoodsVo;
 import org.example.model.R;
 import org.example.service.SeckillGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +30,16 @@ public class SeckillController {
         List<SeckillGoodsVo> seckillGoodsList = seckillGoodsService.selAll();
         return new R<List<SeckillGoodsVo>>().ok(seckillGoodsList);
     }
+    @GetMapping("/findSeckillGoodsById")
+    @ApiOperation(value = "根据查询所有秒杀商品详情",notes ="根据查询所有秒杀商品详情" )
+    public R<SeckillGoodsVo> findById(SeckillGoodsParam seckillGoodsParam) {
+        SeckillGoodsVo seckillGoodsList = seckillGoodsService.findSeckillGoods(seckillGoodsParam);
+        return new R<SeckillGoodsVo>().ok(seckillGoodsList);
+    }
+    @PostMapping("saveSeckillOrder")
+    @ApiOperation(value = "保存订单",notes = "保存订单")
+    public R<String> saveSeckillOrder(SeckillGoodsParam seckillGoodsParam){
+        return seckillGoodsService.saveSeckillOrder(seckillGoodsParam);
 
+    }
 }
