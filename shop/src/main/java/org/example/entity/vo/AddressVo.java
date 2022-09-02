@@ -18,6 +18,5 @@ import java.util.List;
 public class AddressVo extends Address {
     @Serial
     private static final long serialVersionUID = 2271527202474233034L;
-
     private List<AddressVo> children;
 }
