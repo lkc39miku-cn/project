@@ -1,12 +1,10 @@
 package org.example.service.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
-import org.example.config.AlipayConfig;
-import org.example.config.mq.OrderMQProvider;
-import org.example.entity.Commodity;
+import org.config.AlipayConfig;
+import org.config.mq.OrderMQProvider;
 import org.example.entity.Order;
 import org.example.entity.param.OrderParam;
 import org.example.mapper.CommodityMapper;

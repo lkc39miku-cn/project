@@ -24,10 +24,4 @@ public class StoreHouseController {
     @Autowired
     private StoreHouseConvert storeHouseConvert;
 
-    @ApiOperation(value = "仓库查询")
-    @GetMapping(value = "/select")
-    public R<List<StoreHouseVo>> select(){
-        return  new R<List<StoreHouseVo>>()
-                .ok(storeHouseConvert.convert(storeHouseService.select()));
-    }
 }

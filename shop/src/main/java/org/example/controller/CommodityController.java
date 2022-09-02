@@ -25,6 +25,7 @@ public class CommodityController {
     @Autowired
     private CommodityService commodityService;
     @Autowired
+    @Qualifier("org.example.client.CommodityClient")
     private CommodityClient commodityClient;
 
     @ApiOperation(value = "查询商品")

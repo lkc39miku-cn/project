@@ -1,4 +1,4 @@
-package org.example.config.mq;
+package org.config.mq;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -12,7 +12,6 @@ import org.example.mapper.CommodityMapper;
 import org.example.mapper.OrderInfoMapper;
 import org.example.mapper.OrderMapper;
 import org.example.service.OrderService;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;

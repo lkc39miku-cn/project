@@ -21,8 +21,6 @@ public class ResourceConfiguration extends ResourceServerConfigurerAdapter imple
                 .antMatchers("/doc.html", "/webjars/**", "/img/**", "/swagger-resources/**", "/favicon.ico", "/v3/api-docs")
 
                 .permitAll()
-                .antMatchers("/seckill/**")
-                .permitAll()
                 .and()
                 .authorizeRequests()
                 .anyRequest()
