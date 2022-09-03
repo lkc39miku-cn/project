@@ -37,6 +37,8 @@ public interface RoleService {
 
     int authDataScope(RoleParam roleParam);
 
+    int updateMenuPermission(RoleParam roleParam);
+
     int cancelAssign(StaffRole staffRole);
 
     int cancelAssignBatch(String id, List<String> staffIdList);
@@ -44,5 +46,4 @@ public interface RoleService {
     int assignBatch(String id, List<String> staffIdList);
 
     void checkRoleAllowed(Role role);
-
 }

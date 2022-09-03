@@ -123,6 +123,14 @@ public class RoleController {
         return new CompareExecute<>().compare(roleService.authDataScope(roleParam), roleParam.getDeptIdList().size(), CompareExecute.ExecuteStatus.UPDATE);
     }
 
+    @PutMapping("/update/menu/permission")
+    @ApiOperation(value = "修改菜单数据权限", notes = "修改菜单数据权限")
+    @PreAuthorize("@permissionCheck.hasPermissions('system:role:edit')")
+    public R<String> updateMenuPermission(@RequestBody RoleParam roleParam) {
+        roleService.checkRoleAllowed((Role) new Role().setId(roleParam.getId()));
+        return new CompareExecute<>().compare(roleService.updateMenuPermission(roleParam), roleParam.getMenuIdList().size(), CompareExecute.ExecuteStatus.UPDATE);
+    }
+
     @PutMapping("/update/status")
     @ApiOperation(value = "状态修改", notes = "状态修改")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:edit')")

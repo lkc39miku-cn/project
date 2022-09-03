@@ -5,19 +5,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.example.entity.Role;
-import org.example.entity.RoleDept;
-import org.example.entity.Staff;
-import org.example.entity.StaffRole;
+import org.example.entity.*;
 import org.example.entity.convert.RoleConvert;
 import org.example.entity.param.RoleParam;
 import org.example.entity.param.StaffParam;
 import org.example.entity.vo.RoleVo;
 import org.example.exception.service.ServiceException;
-import org.example.mapper.RoleDeptMapper;
-import org.example.mapper.RoleMapper;
-import org.example.mapper.StaffMapper;
-import org.example.mapper.StaffRoleMapper;
+import org.example.mapper.*;
 import org.example.model.R;
 import org.example.service.RoleService;
 import org.example.util.PageUtil;
@@ -40,6 +34,8 @@ public class RoleServiceImpl implements RoleService {
     private StaffRoleMapper staffRoleMapper;
     @Autowired
     private RoleConvert roleConvert;
+    @Autowired
+    private RoleMenuMapper roleMenuMapper;
 
     @Override
     public RoleVo selectByPrimaryKey(String id) {
@@ -114,6 +110,13 @@ public class RoleServiceImpl implements RoleService {
         roleDeptMapper.delete(new LambdaQueryWrapper<RoleDept>()
                 .eq(RoleDept::getRoleId, roleParam.getId()));
         return roleDeptMapper.insertBatch(roleParam.getDeptIdList(), roleParam.getId());
+    }
+
+    @Override
+    public int updateMenuPermission(RoleParam roleParam) {
+        roleMenuMapper.delete(new LambdaQueryWrapper<RoleMenu>()
+                .eq(RoleMenu::getRoleId, roleParam.getId()));
+        return roleMenuMapper.insertBatch(roleParam.getMenuIdList(), roleParam.getId());
     }
 
     @Override
