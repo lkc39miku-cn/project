@@ -46,7 +46,7 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService{
 
     @Override
     public List<SeckillGoodsVo> selAll() {
-        return redisCache.getCacheList("seckill_goods_all");
+        return redisTemplate.boundHashOps("seckill_goods_all").values();
     }
 
     @Override

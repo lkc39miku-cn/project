@@ -47,7 +47,7 @@ public class JwtAuthenticationToken extends OncePerRequestFilter {
                 return;
             }
             User user;
-            if (StringUtils.isEmpty(redisCache.getCacheObject("user name:" + SecurityContextHolder.getContext().getAuthentication().getName()))) {
+            if (Objects.isNull(redisCache.getCacheObject("user name:" + SecurityContextHolder.getContext().getAuthentication().getName()))) {
                  user = userMapper.selectOne(new LambdaQueryWrapper<User>()
                         .eq(User::getAccount, SecurityContextHolder.getContext().getAuthentication().getName()));
                 if (Objects.isNull(user)) {

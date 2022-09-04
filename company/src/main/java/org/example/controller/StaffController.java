@@ -115,7 +115,7 @@ public class StaffController {
         return new R<StaffVo>().ok(staffService.selectByPrimaryKey(id));
     }
 
-    @PutMapping("/update/role/{id}")
+    @PutMapping("/update/role")
     @ApiOperation(value = "授权角色", notes = "授权角色")
     @PreAuthorize("@permissionCheck.hasPermissions('system:staff:edit')")
     public R<String> updateRole(@RequestBody StaffParam staffParam) {

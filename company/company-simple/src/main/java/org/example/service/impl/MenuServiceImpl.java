@@ -92,17 +92,29 @@ public class MenuServiceImpl implements MenuService {
     public List<MenuVo> roleTree(String roleId) {
         Role role = roleMapper.selectById(roleId);
         List<String> list = menuMapper.roleTree(role.getId(), role.isMenuCheckStrictly());
+
         List<MenuVo> menuVoList = selectList(new Menu().setVisible(MenuKey.IS_SHOW).setStatus(MenuKey.IS_USED));
 
-        List<MenuVo> tree = new ArrayList<>();
-        menuVoList.forEach(v -> {
-            if ("0".equals(v.getParentId())) {
-                tree.add(v);
-            }
-        });
-        List<MenuVo> convertTree = convertTree(tree, menuVoList.stream().filter(v -> !"0".equals(v.getParentId())).toList());
+//        List<MenuVo> tree = new ArrayList<>();
+//        menuVoList.forEach(v -> {
+//            if ("0".equals(v.getParentId())) {
+//                tree.add(v);
+//            }
+//        });
+//        List<MenuVo> convertTree = convertTree(tree, menuVoList.stream().filter(v -> !"0".equals(v.getParentId())).toList());
+//
+//        return checkStatus(convertTree, list);
+        return menuVoList;
+    }
 
-        return checkStatus(convertTree, list);
+    @Override
+    public Map<String,Object> roleTreeVersion2(String roleId) {
+        List<MenuVo> menuVoList = selectList(new Menu().setVisible(MenuKey.IS_SHOW).setStatus(MenuKey.IS_USED));
+        Role role = roleMapper.selectById(roleId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("allMenu",menuVoList);
+        map.put("haveMenuIds",menuMapper.roleTree(role.getId(), role.isMenuCheckStrictly()));
+        return map;
     }
 
     private List<MenuVo> checkStatus(List<MenuVo> tree, List<String> list) {

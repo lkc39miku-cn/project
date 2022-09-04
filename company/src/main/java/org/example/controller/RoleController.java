@@ -145,7 +145,7 @@ public class RoleController {
     @GetMapping("/select/assigned")
     @ApiOperation(value = "已分配用户角色列表", notes = "已分配用户角色列表")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:list')")
-    public PageR<List<StaffVo>> selectAssigned(@RequestBody StaffParam staffParam) {
+    public PageR<List<StaffVo>> selectAssigned(StaffParam staffParam) {
         IPage<Staff> staffIPage = roleService.selectAssigned(staffParam);
         return new PageR<List<StaffVo>>().ok(staffConvert.convert(staffIPage.getRecords()))
                 .setCount(staffIPage.getTotal());
@@ -154,7 +154,7 @@ public class RoleController {
     @GetMapping("/select/unassigned")
     @ApiOperation(value = "已分配用户角色列表", notes = "已分配用户角色列表")
     @PreAuthorize("@permissionCheck.hasPermissions('system:role:list')")
-    public PageR<List<StaffVo>> selectUnAssigned(@RequestBody StaffParam staffParam) {
+    public PageR<List<StaffVo>> selectUnAssigned(StaffParam staffParam) {
         IPage<Staff> staffIPage = roleService.selectUnAssigned(staffParam);
         return new PageR<List<StaffVo>>().ok(staffConvert.convert(staffIPage.getRecords()))
                 .setCount(staffIPage.getTotal());

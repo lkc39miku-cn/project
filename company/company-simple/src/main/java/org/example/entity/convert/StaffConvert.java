@@ -48,7 +48,7 @@ public abstract class StaffConvert implements Convert<Staff, StaffVo> {
                 .eq(StaffRole::getStaffId, staffVo.getId()));
 
         staffVo.setRoleList(staffRoleList.size() > 0 ? roleConvert.convert((roleMapper.selectList(new LambdaQueryWrapper<Role>()
-                .in(Role::getId, staffRoleList)))) : null);
+                .in(Role::getId, staffRoleList.stream().map(StaffRole::getRoleId).toList())))) : null);
     }
 
     @AfterMapping

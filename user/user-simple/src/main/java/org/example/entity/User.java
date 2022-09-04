@@ -11,7 +11,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@TableName(value ="user")
 @Data
 @Accessors(chain = true)
 @ApiModel(value = "用户表")

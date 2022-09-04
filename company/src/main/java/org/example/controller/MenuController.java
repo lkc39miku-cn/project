@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.example.entity.Menu;
+import org.example.entity.convert.MenuConvert;
 import org.example.entity.vo.MenuVo;
 import org.example.key.MenuKey;
 import org.example.model.R;
@@ -17,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -27,6 +29,9 @@ public class MenuController {
     private MenuService menuService;
     @Autowired
     private RedisCache redisCache;
+
+    @Autowired
+    private MenuConvert menuConvert;
 
     @GetMapping("/select/{id}")
     @ApiOperation(value = "通过主键查询单条数据", notes = "通过主键查询单条数据")
@@ -44,9 +49,9 @@ public class MenuController {
         if (menuService.checkMenuName(menu.getName())) {
             return new R<String>().fail("菜单名称已存在");
         }
-        if (MenuKey.IS_FRAME.equals(menu.getIsFrame()) && !IpUtils.isHttp(menu.getPath())) {
-            return new R<String>().fail("非http协议的链接必须是http或https开头");
-        }
+//        if (MenuKey.IS_FRAME.equals(menu.getIsFrame()) && !IpUtils.isHttp(menu.getPath())) {
+//            return new R<String>().fail("非http协议的链接必须是http或https开头");
+//        }
         menu.setCreateStaffId(StaffThreadLocal.getStaff().getId());
         redisCache.deleteObject(MenuKey.REDIS_TREE);
         return new CompareExecute<>().compare(menuService.insert(menu), CompareExecute.ExecuteStatus.INSERT);
@@ -74,9 +79,9 @@ public class MenuController {
         if (menuService.checkMenuName(menu.getName(), menu.getId())) {
             return new R<String>().fail("菜单名称已存在");
         }
-        if (MenuKey.IS_FRAME.equals(menu.getIsFrame()) && !IpUtils.isHttp(menu.getPath())) {
-            return new R<String>().fail("非http协议的链接必须是http或https开头");
-        }
+//        if (MenuKey.IS_FRAME.equals(menu.getIsFrame()) && !IpUtils.isHttp(menu.getPath())) {
+//            return new R<String>().fail("非http协议的链接必须是http或https开头");
+//        }
         if (menu.getParentId().equals(menu.getId())) {
             return new R<String>().fail("上级菜单不能为自身");
         }
@@ -89,14 +94,15 @@ public class MenuController {
     @ApiOperation(value = "树形菜单", notes = "树形菜单")
     @PreAuthorize("@permissionCheck.hasPermissions('system:menu:list')")
     public R<List<MenuVo>> tree() {
-        List<MenuVo> menuVos;
-        if (redisCache.getCacheList(MenuKey.REDIS_TREE).isEmpty()) {
-            menuVos = menuService.tree(menuService.selectList(new Menu().setVisible(MenuKey.IS_SHOW)));
-            redisCache.setCacheList(MenuKey.REDIS_TREE, menuVos);
-        } else {
-            menuVos = redisCache.getCacheList(MenuKey.REDIS_TREE);
-        }
-        return new R<List<MenuVo>>().ok(menuVos);
+//        List<MenuVo> menuVos;
+//        if (redisCache.getCacheList(MenuKey.REDIS_TREE).isEmpty()) {
+//            menuVos = menuService.tree(menuService.selectList(new Menu().setVisible(MenuKey.IS_SHOW)));
+//            redisCache.setCacheList(MenuKey.REDIS_TREE, menuVos);
+//        } else {
+//            menuVos = redisCache.getCacheList(MenuKey.REDIS_TREE);
+//        }
+//        return new R<List<MenuVo>>().ok(menuVos);
+        return new R<List<MenuVo>>().ok(menuService.selectList(new Menu().setVisible(MenuKey.IS_SHOW)));
     }
 
     @GetMapping("/role/tree/{roleId}")
@@ -104,5 +110,12 @@ public class MenuController {
     @PreAuthorize("@permissionCheck.hasPermissions('system:menu:list')")
     public R<List<MenuVo>> roleTree(@PathVariable(value = "roleId") String roleId) {
         return new R<List<MenuVo>>().ok(menuService.roleTree(roleId));
+    }
+
+    @GetMapping("/role/treeVersion2/{roleId}")
+    @ApiOperation(value = "加载对应角色菜单列表树", notes = "加载对应角色菜单列表树")
+    @PreAuthorize("@permissionCheck.hasPermissions('system:menu:list')")
+    public R<Map<String,Object>> roleTreeVersion2(@PathVariable(value = "roleId") String roleId) {
+        return new R<Map<String,Object>>().ok(menuService.roleTreeVersion2(roleId));
     }
 }

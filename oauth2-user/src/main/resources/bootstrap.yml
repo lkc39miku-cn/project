@@ -7,7 +7,7 @@ spring:
 
   cloud:
     inetutils:
-      preferred-networks: 192.168.236
+      preferred-networks: 192.168.158
 #      preferred-networks: 192.168.43
 
     nacos:
@@ -55,5 +55,5 @@ feign:
     load-balanced: true
 
 server:
-  address: localhost
+  address: 192.168.158.197
 #  address: 192.168.43.186

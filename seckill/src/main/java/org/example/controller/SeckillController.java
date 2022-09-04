@@ -36,10 +36,9 @@ public class SeckillController {
         SeckillGoodsVo seckillGoodsList = seckillGoodsService.findSeckillGoods(seckillGoodsParam);
         return new R<SeckillGoodsVo>().ok(seckillGoodsList);
     }
-    @PostMapping("saveSeckillOrder")
+    @PostMapping("/saveSeckillOrder")
     @ApiOperation(value = "保存订单",notes = "保存订单")
     public R<String> saveSeckillOrder(SeckillGoodsParam seckillGoodsParam){
         return seckillGoodsService.saveSeckillOrder(seckillGoodsParam);
-
     }
 }

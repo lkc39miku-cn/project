@@ -2,6 +2,9 @@ package org.example.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.example.entity.Menu;
+import org.example.entity.vo.MenuVo;
+import org.example.key.MenuKey;
 import org.example.service.CommodityTypeService;
 import org.example.entity.CommodityType;
 import org.example.entity.convert.CommodityTypeConvert;
@@ -26,7 +29,7 @@ public class CommodityTypeController {
     @ApiOperation(value = "查询商品类型")
     @GetMapping(value = "/tree")
     public R<List<CommodityTypeVo>> tree() {
-        return new R<List<CommodityTypeVo>>().ok(commodityTypeService.tree(commodityTypeService.selectList()));
+        return new R<List<CommodityTypeVo>>().ok(commodityTypeService.selectList());
     }
 
     @ApiOperation(value = "新增商品类型")

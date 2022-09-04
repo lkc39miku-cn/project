@@ -98,12 +98,14 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public int delete(String id) {
         return staffMapper.updateById((Staff) new Staff()
-                .setStatus(StaffKey.IS_DELETE)
+                .setDeleteStatus(StaffKey.IS_DELETE)
                 .setId(id));
     }
 
     @Override
     public int updateRole(String id, List<String> roleIdList) {
+        log.info("id " + id);
+        log.info("roleIdList " + roleIdList);
         staffRoleMapper.delete(new LambdaQueryWrapper<StaffRole>()
                 .eq(StaffRole::getStaffId, id));
 

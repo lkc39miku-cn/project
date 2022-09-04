@@ -7,7 +7,7 @@ spring:
 
   cloud:
     inetutils:
-      preferred-networks: 192.168.43
+      preferred-networks: 192.168.158
 
     nacos:
       config:
@@ -39,6 +39,10 @@ spring:
           uri: lb://oauth2
           predicates:
             - Path=/oauth2/**
+        - id: shop-backstage
+          uri: lb://shop-backstage
+          predicates:
+            - Path=/shop-backstage/**
         - id: user
           uri: lb://user
           predicates:
@@ -63,7 +67,6 @@ spring:
         cors-configurations:
           '[/**]':
             allow-credentials: true
-#            allowed-origins: '*'
             allowed-origin-patterns: '*'
             allowed-methods: '*'
             allowed-headers: '*'
@@ -74,4 +77,4 @@ feign:
     enabled: true
 
 server:
-  address: localhost
+  address: 192.168.158.197

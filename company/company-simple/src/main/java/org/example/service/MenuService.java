@@ -4,6 +4,7 @@ import org.example.entity.Menu;
 import org.example.entity.vo.MenuVo;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface MenuService {
@@ -16,6 +17,8 @@ public interface MenuService {
     List<MenuVo> tree(List<MenuVo> menuVoList);
 
     List<MenuVo> roleTree(String roleId);
+
+    Map<String,Object> roleTreeVersion2(String roleId);
 
     boolean checkMenuName(String name);
 
