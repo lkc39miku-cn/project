@@ -1,6 +1,8 @@
 package org.example.service.impl;
 
 import com.alibaba.fastjson2.JSON;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.internal.util.AlipaySignature;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.example.config.AlipayConfig;
@@ -47,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void pay(HttpServletRequest request) {
+    public void pay(HttpServletRequest request) throws AlipayApiException {
         Map<String, String> params = new HashMap<>();
         Map<String, String[]> requestParams = request.getParameterMap();
 
@@ -76,15 +78,15 @@ public class OrderServiceImpl implements OrderService {
             String totalAmount = params.get("total_amount");
 
             // 更新支付状态
-            orderMapper.update(new Order().setOrderTypeId(9L), new QueryWrapper<Order>().eq("order_number", outTradeNo));
+//            orderMapper.update(new Order().setOrderTypeId(9L), new QueryWrapper<Order>().eq("order_number", outTradeNo));
 
             // 更新订单详情状态
-            Order order = orderMapper.selectOne(new QueryWrapper<Order>().eq("order_number", outTradeNo));
-            List<OrderInfo> orderInfoList = orderInfoMapper.selectList(new QueryWrapper<OrderInfo>().eq("order_id", order.getId()));
-
-            for (OrderInfo orderInfo : orderInfoList) {
-                orderInfoMapper.updateById(orderInfo.setOrderTypeId(2L));
-            }
+//            Order order = orderMapper.selectOne(new QueryWrapper<Order>().eq("order_number", outTradeNo));
+//            List<OrderInfo> orderInfoList = orderInfoMapper.selectList(new QueryWrapper<OrderInfo>().eq("order_id", order.getId()));
+//
+//            for (OrderInfo orderInfo : orderInfoList) {
+//                orderInfoMapper.updateById(orderInfo.setOrderTypeId(2L));
+//            }
 
             // 记录信息
             log.info("===============alipay start===============");

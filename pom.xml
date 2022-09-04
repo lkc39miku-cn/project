@@ -45,6 +45,7 @@
         <spring-cloud-starter-oauth2.version>2.2.5.RELEASE</spring-cloud-starter-oauth2.version>
         <aliyun-sdk-oss.version>3.15.0</aliyun-sdk-oss.version>
         <activation.version>1.1.1</activation.version>
+        <alipay-sdk-java.version>4.22.57.ALL</alipay-sdk-java.version>
     </properties>
 
     <parent>
@@ -123,6 +124,12 @@
                 <groupId>javax.activation</groupId>
                 <artifactId>activation</artifactId>
                 <version>${activation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>${alipay-sdk-java.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
