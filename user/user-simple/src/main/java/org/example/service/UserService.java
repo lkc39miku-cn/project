@@ -8,4 +8,6 @@ public interface UserService {
     IPage<User> selectListByPage(UserParam userParam);
 
     int update(User user);
+
+    int updatePassword(String oldPassword, String newPassword);
 }
