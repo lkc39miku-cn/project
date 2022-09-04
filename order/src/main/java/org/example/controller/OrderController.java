@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import com.alipay.api.AlipayApiException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.example.entity.Order;
@@ -32,7 +33,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "/pay")
-    public void pay(HttpServletRequest request) {
+    public void pay(HttpServletRequest request) throws AlipayApiException {
         orderService.pay(request);
     }
 }

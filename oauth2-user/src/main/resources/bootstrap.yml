@@ -7,7 +7,7 @@ spring:
 
   cloud:
     inetutils:
-      preferred-networks: 192.168.236
+      preferred-networks: 172.17.1.74
 #      preferred-networks: 192.168.43
 
     nacos:
@@ -25,8 +25,9 @@ spring:
 
     sentinel:
       transport:
-        dashboard: 47.103.56.186:8858
+#        dashboard: 47.103.56.186:8858
         client-ip: ${server.address}
+        dashboard: localhost:8858
       enabled: true
       eager: true
 
@@ -55,5 +56,5 @@ feign:
     load-balanced: true
 
 server:
-  address: localhost
+  address: 172.17.1.74
 #  address: 192.168.43.186
