@@ -39,10 +39,10 @@ spring:
           uri: lb://oauth2
           predicates:
             - Path=/oauth2/**
-        - id: shop-backstage
-          uri: lb://shop-backstage
+        - id: shop
+          uri: lb://shop
           predicates:
-            - Path=/shop-backstage/**
+            - Path=/shop/**
         - id: user
           uri: lb://user
           predicates:

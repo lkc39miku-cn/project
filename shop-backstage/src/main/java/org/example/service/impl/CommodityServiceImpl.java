@@ -3,6 +3,7 @@ package org.example.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.commons.lang3.StringUtils;
 import org.example.entity.StoreHouse;
 import org.example.key.StoreHouseKey;
 import org.example.mapper.CommodityMapper;
@@ -31,7 +32,9 @@ public class CommodityServiceImpl implements CommodityService {
     public IPage<Commodity> selectListByPage(CommodityParam commodityParam) {
         return commodityMapper.selectPage(new Page<>(PageUtil.page(), PageUtil.pageSize()),  new LambdaQueryWrapper<Commodity>()
                 .eq(Objects.nonNull(commodityParam.getPublishStatus()), Commodity::getPublishStatus, commodityParam.getPublishStatus())
-                .eq(Objects.nonNull(commodityParam.getDeleteStatus()), Commodity::getDeleteStatus, commodityParam.getDeleteStatus()));
+                .eq(Objects.nonNull(commodityParam.getDeleteStatus()), Commodity::getDeleteStatus, commodityParam.getDeleteStatus())
+                .eq(StringUtils.isNotEmpty(commodityParam.getCommodityBrandId()), Commodity::getCommodityBrandId, commodityParam.getCommodityBrandId())
+                .eq(StringUtils.isNotEmpty(commodityParam.getCommodityTypeId()), Commodity::getCommodityTypeId, commodityParam.getCommodityTypeId()));
     }
 
     @Override

@@ -9,6 +9,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value="商品参数")
 public class CommodityParam {
+    private String commodityBrandId;
+    private String commodityTypeId;
+
     @ApiModelProperty(value = "商品上架 1上架 0下架")
     private Integer publishStatus;
 

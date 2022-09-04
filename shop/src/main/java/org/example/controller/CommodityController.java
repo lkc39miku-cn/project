@@ -12,6 +12,7 @@ import org.example.model.PageR;
 import org.example.model.R;
 import org.example.result.CompareExecute;
 import org.example.service.CommodityService;
+import org.example.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
