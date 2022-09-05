@@ -3,8 +3,12 @@ package org.example.service.impl;
 import com.alibaba.fastjson2.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.example.config.AlipayConfig;
 import org.example.config.mq.OrderMQProvider;
 import org.example.entity.Order;
@@ -14,6 +18,7 @@ import org.example.mapper.OrderInfoMapper;
 import org.example.mapper.OrderMapper;
 import org.example.result.ServiceExecute;
 import org.example.service.OrderService;
+import org.example.util.PageUtil;
 import org.example.util.UserThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,5 +103,11 @@ public class OrderServiceImpl implements OrderService {
             log.info("支付，验证失败");
         }
         log.info("===============alipay end===============");
+    }
+
+    @Override
+    public IPage<Order> selectListByPage(OrderParam orderParam) {
+        return orderMapper.selectPage(new Page<>(PageUtil.page(), PageUtil.pageSize()), new LambdaQueryWrapper<Order>()
+                .eq(StringUtils.isNotEmpty(orderParam.getType()), Order::getOrderType, orderParam.getType()));
     }
 }

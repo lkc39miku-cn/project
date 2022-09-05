@@ -22,4 +22,7 @@ public class OrderParam extends Order {
     @TableField(exist = false)
     private List<OrderInfo> orderInfoList;
 
+    @TableField(exist = false)
+    private String type;
+
 }

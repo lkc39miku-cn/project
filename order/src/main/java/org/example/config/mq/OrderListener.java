@@ -58,15 +58,15 @@ public class OrderListener {
                 return;
             }
 
-            // 0 未支付 1 已支付 2 超时
+            // 0 未支付 1 已支付 2 待评价 3 超时 4 其他状态
             if (order.getOrderType() == 0) {
-                orderMapper.updateById(order.setOrderType(2));
+                orderMapper.updateById(order.setOrderType(1));
 
                 List<OrderInfo> orderInfoList = orderInfoMapper.selectList(new LambdaQueryWrapper<OrderInfo>()
                         .eq(OrderInfo::getOrderId, order.getId()));
 
                 orderInfoList.forEach(orderInfo -> {
-                    orderInfoMapper.updateById(orderInfo.setOrderType(2));
+                    orderInfoMapper.updateById(orderInfo.setOrderType(1));
                 });
 
                 List<String> list = orderInfoList.stream().map(OrderInfo::getCommodityId).toList();

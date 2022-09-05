@@ -26,6 +26,7 @@ spring:
     sentinel:
       transport:
         dashboard: 47.103.56.186:8858
+        client-ip: ${server.address}
       enabled: true
       eager: true
 
@@ -54,5 +55,5 @@ feign:
     load-balanced: true
 
 server:
-#  address: 192.168.236.186
-  address: 192.168.158.197
+  address: 192.168.158.186
+#  address: 192.168.158.197
