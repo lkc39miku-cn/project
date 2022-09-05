@@ -6,6 +6,7 @@ import org.example.entity.param.SeckillGoodsParam;
 import org.example.entity.vo.SeckillGoodsVo;
 import org.example.model.R;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -18,5 +19,7 @@ List<SeckillGoodsVo> selAll();
 IPage<SeckillGoods> selectListByPage();
 SeckillGoodsVo findSeckillGoods(SeckillGoodsParam seckillGoodsParam);
  R<String> saveSeckillOrder(SeckillGoodsParam seckillGoodsParam);
-
+// void pay(HttpServletRequest request) throws AlipayApiException;
+ R<String> addSeckillGoods(SeckillGoodsParam seckillGoodsParam);
+R<String> updateAllStatus();
  }

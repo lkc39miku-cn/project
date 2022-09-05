@@ -1,14 +1,19 @@
 package org.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.example.entity.Commodity;
 import org.example.entity.SeckillGoods;
 import org.example.entity.SeckillOrderInfo;
 import org.example.entity.convert.SeckillGoodsConvert;
 import org.example.entity.param.SeckillGoodsParam;
 import org.example.entity.vo.SeckillGoodsVo;
+import org.example.mapper.CommodityMapper;
 import org.example.mapper.SeckillOrderMapper;
 import org.example.model.R;
 import org.example.service.SeckillGoodsService;
@@ -20,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,6 +39,7 @@ import java.util.Map;
 * @createDate 2022-08-30 10:18:34
 */
 @Service
+@Slf4j
 public class SeckillGoodsServiceImpl implements SeckillGoodsService{
     @Autowired
     SeckillGoodsMapper seckillGoodsMapper;
@@ -39,6 +47,8 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService{
     SeckillGoodsConvert seckillGoodsConvert;
     @Autowired
     SeckillOrderMapper seckillOrderMapper;
+    @Autowired
+    CommodityMapper commodityMapper;
     @Autowired
     private RedisCache redisCache;
     @Autowired
@@ -91,12 +101,47 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService{
                     map.put(seckillGoodsParam.getGoodsId(),seckillGoodsVo);
                     redisCache.setCacheMap("seckill_goods_all",map);
                 }
+
                 //保存待支付的订单到redis数据库中,为了支付时修改
                 Map<String,Object> map=new HashMap<>();
                 map.put(userId,seckillOrder);
                 redisCache.setCacheMap("seckill_order",map);
             }
         return new R<String>().ok();
+    }
+
+//    @Override
+//    public void pay(HttpServletRequest request) throws AlipayApiException {
+//
+//    }
+
+    @Override
+    public R<String> addSeckillGoods(SeckillGoodsParam seckillGoodsParam) {
+        SeckillGoods seckillGoods=new SeckillGoods();
+        seckillGoods.setGoodsId(seckillGoodsParam.getGoodsId());
+        seckillGoods.setSeckillStatus(0);
+        seckillGoods.setSeckillCount(seckillGoodsParam.getSeckillCount());
+        seckillGoods.setStartDate(seckillGoodsParam.getStartDate());
+        seckillGoods.setEndDate(seckillGoodsParam.getEndDate());
+        seckillGoods.setCreateTime(LocalDateTime.now());
+        seckillGoods.setUpdateTime(LocalDateTime.now());
+        if (seckillGoodsMapper.insert(seckillGoods)>0){
+            return new R<String>().ok() ;
+        }else {
+            return new R<String>().fail("添加失败");
+        }
+    }
+
+    @Override
+    public R<String> updateAllStatus() {
+
+       Integer c=  seckillGoodsMapper.update(null, new LambdaUpdateWrapper<SeckillGoods>().set(SeckillGoods::getSeckillStatus, 0));
+       if (c>0){
+           return  new R<String>().ok();
+       }else {
+           return new R<String>().fail("终止失败");
+
+       }
     }
 
     private SeckillGoodsVo getSeckillGoodsVO(SeckillGoodsParam seckillGoodsParam){
