@@ -1,5 +1,4 @@
 package org.example.config.task;
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.example.entity.SeckillGoods;
 import org.example.entity.convert.SeckillGoodsConvert;
@@ -62,7 +61,7 @@ public class SeckillGoodsPushTask {
 //    redisCache.delCacheMapValue("seckill_goods","");
     }
 
-    @Scheduled(cron = "0/120 * * * * ?")
+    @Scheduled(cron = "0/121 * * * * ?")
     public void loadSeckillGoodsAllTORedis() {
         List<SeckillGoods> seckillGoodsList = seckillGoodsMapper.selectList(null);
         if (!seckillGoodsList.isEmpty()) {
@@ -73,7 +72,7 @@ public class SeckillGoodsPushTask {
             }
         }
     }
-        @Scheduled(cron = "0/119 * * * * ?")
+        @Scheduled(cron = "0/120 * * * * ?")
         public void updateSeckillGoods () {
            Map<String,Object> map= redisTemplate.opsForHash().entries("seckill_goods_all");
            for(Map.Entry<String,Object> entry:map.entrySet()) {
@@ -81,7 +80,5 @@ public class SeckillGoodsPushTask {
                seckillGoodsMapper.updateById(seckillGoods);
            }
         }
-
-
 }
 

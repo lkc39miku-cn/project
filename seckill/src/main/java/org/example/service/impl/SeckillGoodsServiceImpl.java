@@ -67,7 +67,7 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService{
     @Override
     public SeckillGoodsVo findSeckillGoods(SeckillGoodsParam seckillGoodsParam) {
 
-        return getSeckillGoodsVO(seckillGoodsParam);
+        return (SeckillGoodsVo) redisCache.getCacheMap("seckill_goods_all").get(seckillGoodsParam.getGoodsId());
     }
 
     @Override
@@ -76,8 +76,8 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService{
         String userId=UserThreadLocal.getUser().getId();
 //        Boolean b=redisTemplate.boundHashOps("seckill_order"+userId).
             if (seckillGoodsVo==null){
-                return new R<String>().fail("商品售完");
-            }  else {
+                return new R<String>().fail("商品已终止销售");
+            } else {
                 SeckillOrderInfo seckillOrder = new SeckillOrderInfo();
                 //seckill_id bigint(20) NULL秒杀商品ID
                 seckillOrder.setSeckillCommodityId(seckillGoodsParam.getGoodsId());
@@ -145,7 +145,7 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService{
     }
 
     private SeckillGoodsVo getSeckillGoodsVO(SeckillGoodsParam seckillGoodsParam){
-        return (SeckillGoodsVo) redisCache.getCacheMap("seckill_goods_all").get(seckillGoodsParam.getGoodsId());
+        return (SeckillGoodsVo) redisCache.getCacheMap("seckill_goods_y").get(seckillGoodsParam.getGoodsId());
     }
 
 
